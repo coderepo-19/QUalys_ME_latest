@@ -1,6 +1,6 @@
 {
-  "client_id": "1000.LLL21C1OGZPQDCQAWQ99ENLYBYB97D",
-  "client_secret": "a71966278c30dd2293eb9feda27f46ff2443381764",
-  "refresh_token": "1000.7164c34d508fd3cd0c9688fd8c9f6e89.09dc29ab08427042c7e14e94dd3436d6",
+  "client_id": "1000.Y53LX8ZHL4YJ0STR6WIPHRMDI14EHU",
+  "client_secret": "b320c75b4200144e941fd08c95b4d6f2f101405da5",
+  "refresh_token": "1000.d11cc66ea18ee7ffdd1417dc2dd1b7ba.bbe4c83a71897e253d5f8b892866fcd3",
   "token_url": "https://accounts.zoho.in/oauth/v2/token"
 }
