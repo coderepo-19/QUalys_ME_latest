@@ -527,8 +527,8 @@ def build_payload(
     if routing.get("site"):         req["site"]         = {"name": routing["site"]}
     if routing.get("group"):        req["group"]        = {"name": routing["group"]}
     
-    # Priority: Assigned technician > Routing > Default
-    tech_to_use = assigned_technician or routing.get("technician")
+    # Priority: Specific Routing > Global Assignment (RoundRobin/Random) > Default Routing
+    tech_to_use = routing.get("technician") or assigned_technician
     if tech_to_use:
         if "@" in str(tech_to_use):
             req["technician"] = {"email_id": tech_to_use}
@@ -1091,13 +1091,19 @@ def run(
                 run_counter += 1  # type: ignore[operator]
 
                 try:
+                    # Only use Round-Robin/Random if routing didn't specify a technician
+                    routing = resolve_routing(row, severity_to_bucket(get(row, "severity")))
+                    assigned_tech = None
+                    if not routing.get("technician"):
+                        assigned_tech = get_assigned_technician(get_rr_state_path(statefile))
+
                     payload = build_payload(
                         row, run_counter, requester_email,
                         map_category_from_os,
                         static_category, static_subcategory, static_item,
                         add_ip_as_asset, asset_id_column,
                         udf_qid_name, udf_ip_name, udf_run_num_name,
-                        get_assigned_technician(get_rr_state_path(statefile)),
+                        assigned_tech,
                         urgency_name, no_urgency,
                         priority_name, no_priority,
                         level_name, no_level
