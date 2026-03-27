@@ -140,7 +140,7 @@
     "group": "",
     "site": "",
     "technician": "",
-    "template": "Default Request",
+    "template": "Default All Related Request",
     "request_type": "Incident",
     "status": "Open",
     "mode": "E-Mail",
