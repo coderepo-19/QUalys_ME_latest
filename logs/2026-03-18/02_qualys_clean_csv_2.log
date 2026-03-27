@@ -1,0 +1,26 @@
+2026-03-18 18:40:20,066 [INFO] ==============================================
+2026-03-18 18:40:20,066 [INFO] [START] Qualys CSV Cleanup (Python Version)
+2026-03-18 18:40:20,066 [INFO] [TIME] 2026-03-18 18:40:20.066719
+2026-03-18 18:40:20,066 [INFO] ==============================================
+2026-03-18 18:40:20,067 [INFO] [INFO] Latest Qualys CSV detected: C:\Users\rscle\Downloads\QUalys_ME\Qualys\Qualys_Download_Vuln_Report\Cloud_Agent_Vuln_Report_20260318_183926.csv
+2026-03-18 18:40:20,070 [INFO] [INFO] Removed old cleaned report
+2026-03-18 18:40:20,070 [INFO] [STEP] Finding header and cleaning data...
+2026-03-18 18:40:20,072 [INFO] [INFO] Header row detected and processing started
+2026-03-18 18:40:20,074 [INFO] [SUCCESS] CSV cleaned successfully. Saved to: C:\Users\rscle\Downloads\QUalys_ME\Qualys\Qualys_Cleaned_Report\ME_Qualys_Vuln_Report.csv
+2026-03-18 18:40:20,074 [INFO] ==============================================
+2026-03-18 18:40:20,074 [INFO] [DONE] Cleaning completed
+2026-03-18 18:40:20,074 [INFO] [END TIME] 2026-03-18 18:40:20.074918
+2026-03-18 18:40:20,075 [INFO] ==============================================
+2026-03-18 18:43:43,636 [INFO] ==============================================
+2026-03-18 18:43:43,636 [INFO] [START] Qualys CSV Cleanup (Python Version)
+2026-03-18 18:43:43,636 [INFO] [TIME] 2026-03-18 18:43:43.636371
+2026-03-18 18:43:43,636 [INFO] ==============================================
+2026-03-18 18:43:43,636 [INFO] [INFO] Latest Qualys CSV detected: C:\Users\rscle\Downloads\QUalys_ME\Qualys\Qualys_Download_Vuln_Report\Cloud_Agent_Vuln_Report_20260318_184300.csv
+2026-03-18 18:43:43,638 [INFO] [INFO] Removed old cleaned report
+2026-03-18 18:43:43,638 [INFO] [STEP] Finding header and cleaning data...
+2026-03-18 18:43:43,640 [INFO] [INFO] Header row detected and processing started
+2026-03-18 18:43:43,646 [INFO] [SUCCESS] CSV cleaned successfully. Saved to: C:\Users\rscle\Downloads\QUalys_ME\Qualys\Qualys_Cleaned_Report\ME_Qualys_Vuln_Report.csv
+2026-03-18 18:43:43,646 [INFO] ==============================================
+2026-03-18 18:43:43,646 [INFO] [DONE] Cleaning completed
+2026-03-18 18:43:43,646 [INFO] [END TIME] 2026-03-18 18:43:43.646720
+2026-03-18 18:43:43,646 [INFO] ==============================================

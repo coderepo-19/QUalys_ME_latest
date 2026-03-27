@@ -1,0 +1,181 @@
+"IP","DNS","NetBIOS","QG Host ID","IP Interfaces","Tracking Method","OS","IP Status","QID","Title","Vuln Status","Type","Severity","Port","Protocol","FQDN","SSL","First Detected","Last Detected","Times Detected","Date Last Fixed","First Reopened","Last Reopened","Times Reopened","CVE ID","Vendor Reference","Bugtraq ID","CVSS","CVSS Base","CVSS Temporal","CVSS Environment","CVSS3.1","CVSS3.1 Base","CVSS3.1 Temporal","Threat","Impact","Solution","Exploitability","Associated Malware","Results","PCI Vuln","Ticket State","Instance","OS CPE","Category","Associated Ags","Associated Tags","QDS","ARS","ACS","TruRisk Score","MITRE ATT&CK Tactic Name","MITRE ATT&CK Technique Name","MITRE ATT&CK Tactic ID","MITRE ATT&CK Technique ID"
+"192.168.40.1","meiltd.meil.ho","MEILTD","391f74bd-2863-44b7-a540-093880bebf02","","QAGENT","Windows Server 2016 Standard 64 bit Edition AD Version 1607","host scanned, found vuln","379223","Windows SMB Version 1 (SMBv1) Detected","Reopened","Vuln","5","","","","","10-06-2025 07:12","03/18/2026 12:45:10","961","","","","","","Microsoft SMBv1 Deprecated","","5.7","7.5 (AV:N/AC:L/Au:N/C:P/I:P/A:P)","5.7 (E:U/RL:TF/RC:C)","Asset Group: -, Collateral Damage Potential:  -, Target Distribution: -, Confidentiality Requirement: -, Integrity Requirement: -, Availability Requirement: -","8.6","9.8 (AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)","8.6 (E:U/RL:T/RC:C)","The Server Message Block (SMB) Protocol is a network file sharing protocol, and as implemented in Microsoft Windows is known as Microsoft SMB Protocol.  
+
+Microsoft publicly deprecated the SMBv1 protocol in 2014. It was superseded by SMBv2 and later protocols 
+
+The Windows host has SMBv1 protocol enabled for either :  
+Client or Server 
+
+QID Detection Logic: 
+Authenticated: 
+Windows: This QID checks for used SMB version on target and flags if SMBv1 is used. 
+Unauthenticated: 
+This QID sends special SMBv1 packets to the target and flags if SMBv1 packets found in response.","SMBv1  protocol is deprecated and vulnerable to many known and unknown vulnerabilities, may allow a remote attacker in complete system compromise.","Microsoft advises users against reinstalling SMBv1 due to its status as an older protocol with well-documented security vulnerabilities, particularly concerning ransomware and other types of malware. Instead, users are strongly encouraged to upgrade to the latest versions of SMB and discontinue the use of SMBv1 for improved security posture and protection against potential threats. 
+Refer to Microsoft KB article SMB (https://techcommunity.microsoft.com/t5/storage-at-microsoft/stop-using-smb1/ba-p/425858) for more details.Workaround: Customer may consider blocking all versions of SMB at the network boundary by blocking TCP port 445 with related protocols on UDP ports 137-138 and TCP port 139, for all boundary devices.","","","CAPTION INSTALLSTATE NAME
+SMB 1.0/CIFS File Sharing Support
+SMB Server version 1 is Enabled#","yes","","","cpe:/o:microsoft:windows_server_2016:1607::x64:","Local","","Cloud Agent, Test_1, Test_2, Windows Server 2016 Standard","100","705","4","705","","","",""
+"192.168.40.2","meiltd.meil.ho","MEILTD","391f74bd-2863-44b7-a540-093880bebf02","","QAGENT","Windows Server 2016 Standard 64 bit Edition AD Version 1607","host scanned, found vuln","110521","Microsoft Office Security Update for March 2026","Active","Vuln","5","","","","","03-11-2026 09:02","03/18/2026 12:45:10","45","","","","","CVE-2026-26107, CVE-2026-26144, CVE-2026-26110, CVE-2026-26109, CVE-2026-26108, CVE-2026-26113, CVE-2026-26112","Office Release Notes for Mac, Office Click-2-Run and Office 365 Release Notes, KB5002838, KB5002849, KB5002846, KB5002718, KB5002848","","5.3","7.2 (AV:L/AC:L/Au:N/C:C/I:C/A:C)","5.3 (E:U/RL:OF/RC:C)","Asset Group: -, Collateral Damage Potential:  -, Target Distribution: -, Confidentiality Requirement: -, Integrity Requirement: -, Availability Requirement: -","6.8","7.8 (AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:H)","6.8 (E:U/RL:O/RC:C)"," Microsoft has released the March 2026 Office Security Updates, addressing multiple Remote Code Execution (RCE) and Information Disclosure vulnerabilities across supported Office products. </P>
+
+ 
+This security update contains the following: 
+KB5002838 (https://support.microsoft.com/help/5002838) 
+KB5002849 (https://support.microsoft.com/help/5002849) 
+KB5002846 (https://support.microsoft.com/help/5002846) 
+KB5002718 (https://support.microsoft.com/help/5002718) 
+KB5002848 (https://support.microsoft.com/help/5002848) 
+Office Click-2-Run and Office 365 Release Notes (https://learn.microsoft.com/en-us/officeupdates/microsoft365-apps-security-updates) and 
+Office Release Notes for Mac (https://learn.microsoft.com/en-us/officeupdates/release-notes-office-for-mac)
+</P>
+
+ QID Detection Logic (Authenticated): 
+Operating System: Windows 
+The detection extracts the Install Path for Microsoft Office via the Windows Registry. The QID checks the file version to identify vulnerable versions of Microsoft Office. 
+ Operating System: MacOS  
+This QID checks for the vulnerable versions of affected Office Applications.</P>
+
+ 
+Note: Office click-2-run and Office 365 installations need to be updated manually or need to be set to automatic update. There is no direct download for the patch.</P>","Successful Exploitation could lead to multiple Remote Code Execution (RCE) and/or Information Disclosure Vulnerabilities.","Customers are advised to refer to these Article(s): 
+
+CVE-2026-26107 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26107),
+CVE-2026-26144 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26144),
+CVE-2026-26110 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26110),
+CVE-2026-26112 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26112),
+CVE-2026-26113 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26113),
+CVE-2026-26109 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26109), and
+CVE-2026-26108 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26108) for more information regarding these vulnerabilities.
+
+ Patch: 
+Following are links for downloading patches to fix the vulnerabilities:
+  CVE-2026-26107 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26107)  CVE-2026-26144 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26144)  CVE-2026-26110 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26110)  CVE-2026-26112 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26112)  CVE-2026-26113 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26113)  CVE-2026-26109 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26109)  CVE-2026-26108 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-26108)","","","HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\ProductVersion LastProduct = 16.0.4266.1001
+KB5002838 is not installed 
+%programfiles(x86)%\Common Files\Microsoft Shared\Office16\Mso.dll  Version is  16.0.4266.1001
+HKLM\SOFTWARE\Microsoft\Office\16.0\Common\ProductVersion LastProduct = 16.0.4266.1001
+KB5002848 is not installed 
+C:\Program Files\Microsoft Office\Office16\winword.exe  Version is  16.0.4266.1001
+KB5002849 is not installed 
+C:\Program Files\Microsoft Office\Office16\excel.exe  Version is  16.0.4266.1001
+KB5002718 is not installed 
+C:\Program Files\Microsoft Office\Office16\Chart.dll  Version is  16.0.4266.1001
+%programfiles%\Common Files\Microsoft Shared\Office16\Mso.dll  Version is  16.0.4266.1001#","yes","","","cpe:/o:microsoft:windows_server_2016:1607::x64:","Office Application","","Cloud Agent, Test_1, Test_2, Windows Server 2016 Standard","35","705","4","705","privilege-escalation","Exploitation for Privilege Escalation","TA0004","T1068"
+"192.168.40.3","meiltd.meil.ho","MEILTD","391f74bd-2863-44b7-a540-093880bebf02","","QAGENT","Windows Server 2016 Standard 64 bit Edition AD Version 1607","host scanned, found vuln","110515","Microsoft Office Security Update for January 2026","Active","Vuln","5","","","","","01/14/2026 12:44:47","03/18/2026 12:45:10","372","","","","","CVE-2026-20950, CVE-2026-20949, CVE-2026-20948, CVE-2026-20956, CVE-2026-20957, CVE-2026-20952, CVE-2026-20955, CVE-2026-20953, CVE-2026-20946, CVE-2026-20944, CVE-2026-20943","Office Release Notes for Mac, Office Click-2-Run and Office 365 Release Notes, KB5002824, KB5002829, KB5002831, KB5002826","","5.3","7.2 (AV:L/AC:L/Au:N/C:C/I:C/A:C)","5.3 (E:U/RL:OF/RC:C)","Asset Group: -, Collateral Damage Potential:  -, Target Distribution: -, Confidentiality Requirement: -, Integrity Requirement: -, Availability Requirement: -","7.3","8.4 (AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)","7.3 (E:U/RL:O/RC:C)"," Microsoft has released the January 2026 Office Security Updates, addressing multiple vulnerabilities across supported Office products. </P>
+
+ 
+This security update contains the following: 
+KB5002824 (https://support.microsoft.com/help/5002824) 
+KB5002829 (https://support.microsoft.com/help/5002829) 
+KB5002831 (https://support.microsoft.com/help/5002831) 
+KB5002826 (https://support.microsoft.com/help/5002826) 
+Office Click-2-Run and Office 365 Release Notes (https://learn.microsoft.com/en-us/officeupdates/microsoft365-apps-security-updates) and 
+Office Release Notes for Mac (https://learn.microsoft.com/en-us/officeupdates/release-notes-office-for-mac)
+</P>
+
+ QID Detection Logic (Authenticated): 
+Operating System: Windows 
+The detection extracts the Install Path for Microsoft Office via the Windows Registry. The QID checks the file version to identify vulnerable versions of Microsoft Office. 
+ Operating System: MacOS  
+This QID checks for the vulnerable versions of affected Office Applications.</P>
+
+ 
+Note: Office click-2-run and Office 365 installations need to be updated manually or need to be set to automatic update. There is no direct download for the patch.</P>","Successful Exploitation of these vulnerabilities could lead to Remote Code Execution and/or Security Feature Bypass","Customers are advised to refer to these Article(s): 
+
+CVE-2026-20950 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20950),
+CVE-2026-20949 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20949),
+CVE-2026-20948 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20948),
+CVE-2026-20956 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20956),
+CVE-2026-20957 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20957),
+CVE-2026-20952 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20952),
+CVE-2026-20955 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20955),
+CVE-2026-20953 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20953),
+CVE-2026-20946 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20946),
+CVE-2026-20944 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20944), and
+CVE-2026-20943 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20943) for more information regarding these vulnerabilities.
+ Patch: 
+Following are links for downloading patches to fix the vulnerabilities:
+  CVE-2026-20950 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20950)  CVE-2026-20949 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20949)  CVE-2026-20948 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20948)  CVE-2026-20956 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20956)  CVE-2026-20957 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20957)  CVE-2026-20952 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20952)  CVE-2026-20955 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20955)  CVE-2026-20953 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20953)  CVE-2026-20946 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20946)  CVE-2026-20944 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20944)  CVE-2026-20943 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2026-20943)","","","HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\ProductVersion LastProduct = 16.0.4266.1001 
+KB5002826 is not installed  
+%ProgramFiles(x86)%\Common Files\Microsoft Shared\Office16\mso.dll  Version is  16.0.4266.1001 
+HKLM\SOFTWARE\Microsoft\Office\16.0\Common\ProductVersion LastProduct = 16.0.4266.1001 
+KB5002826 is not installed  
+%ProgramFiles%\Common Files\Microsoft Shared\Office16\mso.dll  Version is  16.0.4266.1001 
+KB5002829 is not installed  
+C:\Program Files\Microsoft Office\Office16\winword.exe  Version is  16.0.4266.1001 
+KB5002831 is not installed  
+C:\Program Files\Microsoft Office\Office16\excel.exe  Version is  16.0.4266.1001#","yes","","","cpe:/o:microsoft:windows_server_2016:1607::x64:","Office Application","","Cloud Agent, Test_1, Test_2, Windows Server 2016 Standard","35","705","4","705","execution, privilege-escalation","Shared Modules, Exploitation for Privilege Escalation","TA0002, TA0004","T1129, T1068"
+"192.168.40.4","meiltd.meil.ho","MEILTD","391f74bd-2863-44b7-a540-093880bebf02","","QAGENT","Windows Server 2016 Standard 64 bit Edition AD Version 1607","host scanned, found vuln","110495","Microsoft Office Remote Code Execution (RCE) Vulnerability Security Update for June 2025","Fixed","Vuln","5","","","","","12-10-2025 11:11","03/18/2026 12:45:10","576","","","","","CVE-2025-32717, CVE-2025-47173, CVE-2025-47175, CVE-2025-47174, CVE-2025-47170, CVE-2025-47169, CVE-2025-47168, CVE-2025-47167, CVE-2025-47165, CVE-2025-47164, CVE-2025-47953, CVE-2025-47162, CVE-2025-47957","Office Click-2-Run and Office 365 Release Notes, Office Release Notes for Mac, KB5002616, KB5002730, KB5002689, KB5002710, KB5002735, KB5002728","","5.6","7.2 (AV:L/AC:L/Au:N/C:C/I:C/A:C)","5.6 (E:POC/RL:OF/RC:C)","Asset Group: -, Collateral Damage Potential:  -, Target Distribution: -, Confidentiality Requirement: -, Integrity Requirement: -, Availability Requirement: -","7.6","8.4 (AV:L/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H)","7.6 (E:P/RL:O/RC:C)","Microsoft has released Office Security Updates for June 2025 to fix Remote Code Execution vulnerabilities. 
+This security update contains the following: 
+KB5002616 (https://support.microsoft.com/help/5002616) 
+KB5002730 (https://support.microsoft.com/help/5002730) 
+KB5002689 (https://support.microsoft.com/help/5002689) 
+KB5002710 (https://support.microsoft.com/help/5002710) 
+KB5002735 (https://support.microsoft.com/help/5002735) 
+KB5002728 (https://support.microsoft.com/help/5002728) 
+Office Release Notes for Mac (https://learn.microsoft.com/en-us/officeupdates/release-notes-office-for-mac) and 
+Office Click-2-Run and Office 365 Release Notes (https://docs.microsoft.com/en-us/officeupdates/microsoft365-apps-security-updates)
+
+ QID Detection Logic (Authenticated): 
+Operating System: Windows 
+The detection extracts the Install Path for Microsoft Office via the Windows Registry. The QID checks the file version of ""graph.exe"" to identify vulnerable versions of Microsoft Office.  
+Operating System: MacOS  
+This QID checks for the vulnerable versions of affected Office Applications.","Vulnerable products may be prone to Remote Code Execution vulnerabilities.","Customers are advised to refer to these Article(s):  
+CVE-2025-32717 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-32717),
+CVE-2025-47173 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47173),
+ CVE-2025-47175 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47175),
+ CVE-2025-47174 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47174),
+ CVE-2025-47170 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47170),
+ CVE-2025-47169 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47169),
+ CVE-2025-47168 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47168),
+ CVE-2025-47167 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47167),
+ CVE-2025-47166 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47166),
+ CVE-2025-47164 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47164),
+ CVE-2025-47153 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47153),
+ CVE-2025-47162 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47162), and
+ CVE-2025-47157 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47157) for more information regarding these vulnerabilities. 
+ Patch: 
+Following are links for downloading patches to fix the vulnerabilities:
+  CVE-2025-47173 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47173)  CVE-2025-47175 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47175)  CVE-2025-47174 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47174)  CVE-2025-47170 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47170)  CVE-2025-47169 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47169)  CVE-2025-47168 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47168)  CVE-2025-47167 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47167)  CVE-2025-47165 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47166)  CVE-2025-47164 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47164)  CVE-2025-47953 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47153)  CVE-2025-47162 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47162)  CVE-2025-47957 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-47157)  CVE-2025-32717 (https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-32717)","Source: exploitdb
+Reference:CVE-2025-47165
+Description:Microsoft Excel 2024 Use after free - Remote Code Execution (RCE)
+Link:https://www.exploit-db.com/exploits/52343
+Reference:CVE-2025-47175
+Description:Microsoft PowerPoint 2019 - Remote Code Execution (RCE)
+Link:https://www.exploit-db.com/exploits/52351
+Reference:CVE-2025-47957
+Description:Microsoft Excel LTSC 2024 - Remote Code Execution (RCE)
+Link:https://www.exploit-db.com/exploits/52337
+
+Source: github-exploits
+Reference:CVE-2025-47175
+Description:mbanyamer/mbanyamer-Microsoft-PowerPoint-Use-After-Free-Remote-Code-Execution-RCE exploit repository
+Link:https://github.com/mbanyamer/mbanyamer-Microsoft-PowerPoint-Use-After-Free-Remote-Code-Execution-RCE
+
+Source: blogs
+Reference:CVE-2025-47165
+Description:Technical Analysis
+Link:https://attackerkb.com/assessments/1160a1ba-f757-485a-b938-37fc088197ef
+Reference:CVE-2025-47957
+Description:Technical Analysis
+Link:https://attackerkb.com/assessments/4f9ad32a-1fc4-440e-b270-9d21cce44bf0
+Reference:CVE-2025-47170
+Description:VBA Bypass Windows Defender Exploit PoC
+Link:https://cxsecurity.com/issue/WLB-2025070006
+
+Source: vulncheck-threat-actors
+Reference:CVE-2025-47165
+Description:Unattributed
+Link:https://hs-8813571.f.hubspotemail.net/hubfs/8813571/PERISCOPE_VULNINTEL_20250903.pdf
+Reference:CVE-2025-47170
+Description:Unattributed
+Link:https://hs-8813571.f.hubspotemail.net/hubfs/8813571/PERISCOPE_VULNINTEL_20250903.pdf","","HKLM\SOFTWARE\Wow6432Node\Microsoft\Office\16.0\Common\ProductVersion LastProduct = 16.0.4266.1001 
+KB5002730 is not installed  
+%ProgramFiles(x86)%\Common Files\Microsoft Shared\Office16\mso.dll  Version is  16.0.4266.1001 
+HKLM\SOFTWARE\Microsoft\Office\16.0\Common\ProductVersion LastProduct = 16.0.4266.1001 
+KB5002616 is not installed  
+C:\Program Files\Microsoft Office\Office16\oart.dll  Version is  16.0.4266.1001 
+KB5002730 is not installed  
+%ProgramFiles%\Common Files\Microsoft Shared\Office16\mso.dll  Version is  16.0.4266.1001 
+KB5002689 is not installed  
+C:\Program Files\Microsoft Office\Office16\ppcore.dll  Version is  16.0.4266.1001 
+KB5002710 is not installed  
+C:\Program Files\Microsoft Office\Office16\winword.exe  Version is  16.0.4266.1001 
+KB5002735 is not installed  
+C:\Program Files\Microsoft Office\Office16\excel.exe  Version is  16.0.4266.1001#","yes","","","cpe:/o:microsoft:windows_server_2016:1607::x64:","Office Application","","Cloud Agent, Test_1, Test_2, Windows Server 2016 Standard","95","705","4","705","privilege-escalation","Exploitation for Privilege Escalation","TA0004","T1068"

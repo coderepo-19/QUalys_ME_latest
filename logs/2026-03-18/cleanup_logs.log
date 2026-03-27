@@ -1,0 +1,26 @@
+=================================================
+        Qualys-ME Log Maintenance Tool           
+=================================================
+
+[1/2] Moving logs from Slave folder...
+[OK] No log files found in Slave folder.
+
+[2/2] Rotating old logs (Retention: 30 runs)...
+[OK] Total logs (5) within retention limit.
+
+=================================================
+          Log maintenance completed              
+=================================================
+=================================================
+        Qualys-ME Log Maintenance Tool           
+=================================================
+
+[1/2] Moving logs from Slave folder...
+[OK] No log files found in Slave folder.
+
+[2/2] Rotating old logs (Retention: 30 runs)...
+[OK] Total logs (7) within retention limit.
+
+=================================================
+          Log maintenance completed              
+=================================================

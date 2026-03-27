@@ -1,0 +1,23 @@
+2026-03-18 18:39:26,550 [INFO] =================================================
+2026-03-18 18:39:26,550 [INFO] [START] Qualys Full Cleanup + Download Automation
+2026-03-18 18:39:26,550 [INFO] [TIME] 2026-03-18 18:39:26.550617
+2026-03-18 18:39:26,550 [INFO] =================================================
+2026-03-18 18:39:26,550 [INFO] [STEP 0] Cleaning local output directory...
+2026-03-18 18:39:26,554 [INFO] [DELETE] Local file: Cloud_Agent_Vuln_Report_20260318_002632.csv
+2026-03-18 18:39:26,554 [INFO] [STEP 1] Listing existing reports...
+2026-03-18 18:39:28,180 [INFO] [INFO] 4 reports found. Deleting...
+2026-03-18 18:39:28,181 [INFO] [DELETE] Report ID: 7244400
+2026-03-18 18:39:30,498 [INFO] [DELETE] Report ID: 7244394
+2026-03-18 18:39:32,616 [INFO] [DELETE] Report ID: 7244392
+2026-03-18 18:39:35,010 [INFO] [DELETE] Report ID: 7244383
+2026-03-18 18:39:37,041 [INFO] [STEP 3] Launching new report...
+2026-03-18 18:39:44,676 [INFO] [INFO] Report launched | ID: 7262131
+2026-03-18 18:39:44,677 [INFO] [STEP 4] Waiting for report completion...
+2026-03-18 18:39:46,096 [INFO] Status: Running | Elapsed: 1s
+2026-03-18 18:40:17,289 [INFO] Status: Finished | Elapsed: 32s
+2026-03-18 18:40:17,289 [INFO] [STEP 5] Downloading report...
+2026-03-18 18:40:18,696 [INFO] [SUCCESS] File saved: C:\Users\rscle\Downloads\QUalys_ME\Qualys\Qualys_Download_Vuln_Report\Cloud_Agent_Vuln_Report_20260318_183926.csv
+2026-03-18 18:40:18,696 [INFO] [STEP 6] Final cleanup (delete report)...
+2026-03-18 18:40:19,901 [INFO] =================================================
+2026-03-18 18:40:19,902 [INFO] [COMPLETE]
+2026-03-18 18:40:19,902 [INFO] =================================================

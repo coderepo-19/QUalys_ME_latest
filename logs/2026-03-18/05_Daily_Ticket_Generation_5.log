@@ -1,0 +1,333 @@
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+[RETRY 1] Dropping failing fields from SDP request: ['group']
+
+=== Closing Fixed Vulnerabilities ===
+[CLOSE] Could not fetch status for ticket 1861000014632164 (192.168.30.1|379223) — skipping
+[CLOSE] Could not fetch status for ticket 1861000014626216 (192.168.30.2|110521) — skipping
+[CLOSE] Could not fetch status for ticket 1861000014628293 (192.168.30.3|110515) — skipping
+[CLOSE] Could not fetch status for ticket 1861000014632176 (192.168.30.4|110495) — skipping
+Summary: 0 tickets closed, 0 failures.
+
+[INFO] Routing rules loaded from: C:\Users\rscle\Downloads\QUalys_ME\Config\routing_rules.json
+Detected delimiter: COMMA
+Endpoint: https://support.vivriticapital.com/app/itdesk/api/v3/requests
+[Row 1] Created OK 192.168.4.86|110521 (SDP ID: 29163000000368577)
+[Row 2] Created OK 192.168.4.86|106307 (SDP ID: 29163000000368589)
+[Row 3] Created OK 192.168.4.86|92342 (SDP ID: 29163000000371369)
+[Row 4] Created OK 192.168.4.86|92332 (SDP ID: 29163000000371381)
+[Row 5] Created OK 192.168.4.86|92312 (SDP ID: 29163000000368601)
+[Row 6] Created OK 192.168.4.86|92295 (SDP ID: 29163000000369377)
+[Row 7] Created OK 192.168.4.86|92287 (SDP ID: 29163000000366849)
+[Row 8] Created OK 192.168.4.86|92281 (SDP ID: 29163000000367697)
+[Row 9] Created OK 192.168.4.86|386767 (SDP ID: 29163000000366861)
+[Row 10] Created OK 192.168.4.86|386534 (SDP ID: 29163000000370219)
+[Row 11] Created OK 192.168.4.86|385740 (SDP ID: 29163000000368613)
+[Row 12] Created OK 192.168.4.86|385734 (SDP ID: 29163000000376001)
+[Row 13] Created OK 192.168.4.86|385732 (SDP ID: 29163000000370231)
+[Row 14] Created OK 192.168.4.86|384648 (SDP ID: 29163000000368625)
+[Row 15] Created OK 192.168.4.86|382615 (SDP ID: 29163000000368637)
+[Row 16] Created OK 192.168.4.86|378941 (SDP ID: 29163000000371393)
+[Row 17] Created OK 192.168.4.86|378755 (SDP ID: 29163000000369389)
+[Row 18] Created OK 192.168.4.86|378332 (SDP ID: 29163000000370243)
+[Row 19] Created OK 192.168.4.86|92364 (SDP ID: 29163000000369401)
+[Row 20] Created OK 192.168.4.86|92361 (SDP ID: 29163000000367709)
+[Row 21] Created OK 192.168.4.86|92360 (SDP ID: 29163000000368649)
+[Row 22] Created OK 192.168.4.86|92359 (SDP ID: 29163000000376013)
+[Row 23] Created OK 192.168.4.86|92358 (SDP ID: 29163000000368661)
+[Row 24] Created OK 192.168.4.86|92357 (SDP ID: 29163000000369413)
+[Row 25] Created OK 192.168.4.86|92350 (SDP ID: 29163000000370255)
+[Row 26] Created OK 192.168.4.86|92347 (SDP ID: 29163000000371407)
+[Row 27] Created OK 192.168.4.86|92336 (SDP ID: 29163000000367721)
+[Row 28] Created OK 192.168.4.86|92317 (SDP ID: 29163000000369425)
+
+⚠️ Interrupted by user (Ctrl+C). Saving state...
+
+=== FINAL SUMMARY ===
+Created : 28
+Skipped : 0
+Failed  : 0
+State saved to: C:\Users\rscle\Downloads\QUalys_ME\Qualys\State\sdp_qualys_state.json
+=== Starting Qualys -> ME Workflow ===
+New token generated
+Traceback (most recent call last):
+  File "C:\Users\rscle\Downloads\QUalys_ME\scripts\Slave\05_Daily_Ticket_Generation_5.py", line 73, in <module>
+    run_ticket_script(token, dry_run=dry_run)
+  File "C:\Users\rscle\Downloads\QUalys_ME\scripts\Slave\05_Daily_Ticket_Generation_5.py", line 61, in run_ticket_script
+    subprocess.run(command, check=True)
+  File "C:\Users\rscle\AppData\Local\Python\pythoncore-3.14-64\Lib\subprocess.py", line 556, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+  File "C:\Users\rscle\AppData\Local\Python\pythoncore-3.14-64\Lib\subprocess.py", line 1212, in communicate
+    self.wait()
+  File "C:\Users\rscle\AppData\Local\Python\pythoncore-3.14-64\Lib\subprocess.py", line 1278, in wait
+    return self._wait(timeout=timeout)
+  File "C:\Users\rscle\AppData\Local\Python\pythoncore-3.14-64\Lib\subprocess.py", line 1604, in _wait
+    result = _winapi.WaitForSingleObject(self._handle,
+KeyboardInterrupt
+
+=== Closing Fixed Vulnerabilities ===
+[CLOSE] Ticket 29163000000368577 for 192.168.4.86|110521...  - Closed
+[CLOSE] Ticket 29163000000368589 for 192.168.4.86|106307...  - Closed
+[CLOSE] Ticket 29163000000371369 for 192.168.4.86|92342...  - Closed
+[CLOSE] Ticket 29163000000371381 for 192.168.4.86|92332...  - Closed
+[CLOSE] Ticket 29163000000368601 for 192.168.4.86|92312...  - Closed
+[CLOSE] Ticket 29163000000369377 for 192.168.4.86|92295...  - Closed
+[CLOSE] Ticket 29163000000366849 for 192.168.4.86|92287...  - Closed
+[CLOSE] Ticket 29163000000367697 for 192.168.4.86|92281...  - Closed
+[CLOSE] Ticket 29163000000366861 for 192.168.4.86|386767...  - Closed
+[CLOSE] Ticket 29163000000370219 for 192.168.4.86|386534...  - Closed
+[CLOSE] Ticket 29163000000368613 for 192.168.4.86|385740...  - Closed
+[CLOSE] Ticket 29163000000376001 for 192.168.4.86|385734...  - Closed
+[CLOSE] Ticket 29163000000370231 for 192.168.4.86|385732...  - Closed
+[CLOSE] Ticket 29163000000368625 for 192.168.4.86|384648...  - Closed
+[CLOSE] Ticket 29163000000368637 for 192.168.4.86|382615...  - Closed
+[CLOSE] Ticket 29163000000371393 for 192.168.4.86|378941...  - Closed
+[CLOSE] Ticket 29163000000369389 for 192.168.4.86|378755...  - Closed
+[CLOSE] Ticket 29163000000370243 for 192.168.4.86|378332...  - Closed
+[CLOSE] Ticket 29163000000369401 for 192.168.4.86|92364...  - Closed
+[CLOSE] Ticket 29163000000367709 for 192.168.4.86|92361...  - Closed
+[CLOSE] Ticket 29163000000368649 for 192.168.4.86|92360...  - Closed
+[CLOSE] Ticket 29163000000376013 for 192.168.4.86|92359...  - Closed
+[CLOSE] Ticket 29163000000368661 for 192.168.4.86|92358...  - Closed
+[CLOSE] Ticket 29163000000369413 for 192.168.4.86|92357...  - Closed
+[CLOSE] Ticket 29163000000370255 for 192.168.4.86|92350...  - Closed
+[CLOSE] Ticket 29163000000371407 for 192.168.4.86|92347...  - Closed
+[CLOSE] Ticket 29163000000367721 for 192.168.4.86|92336...  - Closed
+[CLOSE] Ticket 29163000000369425 for 192.168.4.86|92317...  - Closed
+Summary: 28 tickets closed, 0 failures.
+
+[INFO] Routing rules loaded from: C:\Users\rscle\Downloads\QUalys_ME\Config\routing_rules.json
+Detected delimiter: COMMA
+Endpoint: https://sdpondemand.manageengine.in/app/itdesk/api/v3/requests
+[Row 1] Found existing SDP ID: 29163000000322001 for 192.168.0.243|379223 (Syncing State)
+[Row 2] Found existing SDP ID: 29163000000340001 for 192.168.0.243|110521 (Syncing State)
+[Row 3] Found existing SDP ID: 29163000000319003 for 192.168.0.243|110515 (Syncing State)
+[Row 4] Found existing SDP ID: 29163000000319015 for 192.168.0.243|110495 (Syncing State)
+[Row 5] Found existing SDP ID: 29163000000315582 for 192.168.0.243|110470 (Syncing State)
+[Row 6] Found existing SDP ID: 29163000000321007 for 192.168.0.243|110468 (Syncing State)
+[Row 7] Found existing SDP ID: 29163000000322017 for 192.168.0.243|110467 (Syncing State)
+[Row 8] Found existing SDP ID: 29163000000315594 for 192.168.0.243|110458 (Syncing State)
+[Row 9] Found existing SDP ID: 29163000000316003 for 192.168.0.243|110457 (Syncing State)
+[Row 10] Found existing SDP ID: 29163000000316015 for 192.168.0.243|110428 (Syncing State)
+[Row 11] Found existing SDP ID: 29163000000320007 for 192.168.0.243|110398 (Syncing State)
+[Row 12] Found existing SDP ID: 29163000000315606 for 192.168.0.243|110290 (Syncing State)
+[Row 13] Found existing SDP ID: 29163000000322029 for 192.168.0.243|110284 (Syncing State)
+[Row 14] Found existing SDP ID: 29163000000319027 for 192.168.0.243|110278 (Syncing State)
+[Row 15] Found existing SDP ID: 29163000000315618 for 192.168.0.243|110273 (Syncing State)
+[Row 16] Found existing SDP ID: 29163000000322041 for 192.168.0.243|110272 (Syncing State)
+[Row 17] Found existing SDP ID: 29163000000321019 for 192.168.0.243|110271 (Syncing State)
+[Row 18] Found existing SDP ID: 29163000000323001 for 192.168.0.243|110263 (Syncing State)
+[Row 19] Found existing SDP ID: 29163000000316027 for 192.168.0.243|110262 (Syncing State)
+[Row 20] Found existing SDP ID: 29163000000321031 for 192.168.0.243|110258 (Syncing State)
+[Row 21] Found existing SDP ID: 29163000000316039 for 192.168.0.243|106305 (Syncing State)
+[Row 22] Found existing SDP ID: 29163000000320019 for 192.168.0.243|92341 (Syncing State)
+[Row 23] Found existing SDP ID: 29163000000315630 for 192.168.0.243|92329 (Syncing State)
+[Row 24] Found existing SDP ID: 29163000000321043 for 192.168.0.243|92311 (Syncing State)
+[Row 25] Found existing SDP ID: 29163000000315642 for 192.168.0.243|92297 (Syncing State)
+[Row 26] Found existing SDP ID: 29163000000320031 for 192.168.0.243|92287 (Syncing State)
+[Row 27] Found existing SDP ID: 29163000000316051 for 192.168.0.243|92282 (Syncing State)
+[Row 28] Found existing SDP ID: 29163000000316063 for 192.168.0.243|92275 (Syncing State)
+[Row 29] Found existing SDP ID: 29163000000316075 for 192.168.0.243|92211 (Syncing State)
+[Row 30] Found existing SDP ID: 29163000000322053 for 192.168.0.243|92204 (Syncing State)
+[Row 31] Found existing SDP ID: 29163000000319039 for 192.168.0.243|92189 (Syncing State)
+[Row 32] Found existing SDP ID: 29163000000321055 for 192.168.0.243|92178 (Syncing State)
+[Row 33] Found existing SDP ID: 29163000000319051 for 192.168.0.243|92165 (Syncing State)
+[Row 34] Found existing SDP ID: 29163000000322065 for 192.168.0.243|92161 (Syncing State)
+[Row 35] Found existing SDP ID: 29163000000320043 for 192.168.0.243|92160 (Syncing State)
+[Row 36] Found existing SDP ID: 29163000000316087 for 192.168.0.243|92149 (Syncing State)
+[Row 37] Found existing SDP ID: 29163000000315654 for 192.168.0.243|92131 (Syncing State)
+[Row 38] Found existing SDP ID: 29163000000319063 for 192.168.0.243|92128 (Syncing State)
+[Row 39] Found existing SDP ID: 29163000000319075 for 192.168.0.243|92111 (Syncing State)
+[Row 40] Found existing SDP ID: 29163000000323013 for 192.168.0.243|386516 (Syncing State)
+[Row 41] Found existing SDP ID: 29163000000319087 for 192.168.0.243|378487 (Syncing State)
+[Row 42] Found existing SDP ID: 29163000000322077 for 192.168.0.243|378332 (Syncing State)
+[Row 43] Found existing SDP ID: 29163000000322089 for 192.168.0.243|110517 (Syncing State)
+[Row 44] Found existing SDP ID: 29163000000322101 for 192.168.0.243|110512 (Syncing State)
+[Row 45] Found existing SDP ID: 29163000000315666 for 192.168.0.243|110510 (Syncing State)
+[Row 46] Found existing SDP ID: 29163000000315678 for 192.168.0.243|110508 (Syncing State)
+[Row 47] Found existing SDP ID: 29163000000319099 for 192.168.0.243|110505 (Syncing State)
+[Row 48] Found existing SDP ID: 29163000000315690 for 192.168.0.243|110503 (Syncing State)
+[Row 49] Found existing SDP ID: 29163000000319111 for 192.168.0.243|110500 (Syncing State)
+[Row 50] Found existing SDP ID: 29163000000315702 for 192.168.0.243|110499 (Syncing State)
+[Row 51] Found existing SDP ID: 29163000000319123 for 192.168.0.243|110497 (Syncing State)
+[Row 52] Found existing SDP ID: 29163000000319135 for 192.168.0.243|110494 (Syncing State)
+[Row 53] Found existing SDP ID: 29163000000323025 for 192.168.0.243|110492 (Syncing State)
+[Row 54] Found existing SDP ID: 29163000000320055 for 192.168.0.243|110490 (Syncing State)
+[Row 55] Found existing SDP ID: 29163000000319147 for 192.168.0.243|110489 (Syncing State)
+[Row 56] Found existing SDP ID: 29163000000323037 for 192.168.0.243|110486 (Syncing State)
+[Row 57] Found existing SDP ID: 29163000000316099 for 192.168.0.243|110483 (Syncing State)
+[Row 58] Found existing SDP ID: 29163000000316111 for 192.168.0.243|110480 (Syncing State)
+[Row 59] Found existing SDP ID: 29163000000315718 for 192.168.0.243|110479 (Syncing State)
+[Row 60] Found existing SDP ID: 29163000000323049 for 192.168.0.243|110476 (Syncing State)
+[Row 61] Found existing SDP ID: 29163000000321067 for 192.168.0.243|110473 (Syncing State)
+[Row 62] Found existing SDP ID: 29163000000319171 for 192.168.0.243|110465 (Syncing State)
+[Row 63] Found existing SDP ID: 29163000000322125 for 192.168.0.243|110451 (Syncing State)
+[Row 64] Found existing SDP ID: 29163000000319183 for 192.168.0.243|110447 (Syncing State)
+[Row 65] Found existing SDP ID: 29163000000323061 for 192.168.0.243|110446 (Syncing State)
+[Row 66] Found existing SDP ID: 29163000000323073 for 192.168.0.243|110445 (Syncing State)
+[Row 67] Found existing SDP ID: 29163000000316123 for 192.168.0.243|110443 (Syncing State)
+[Row 68] Found existing SDP ID: 29163000000320067 for 192.168.0.243|110442 (Syncing State)
+[Row 69] Found existing SDP ID: 29163000000321079 for 192.168.0.243|110441 (Syncing State)
+[Row 70] Found existing SDP ID: 29163000000316135 for 192.168.0.243|110438 (Syncing State)
+[Row 71] Found existing SDP ID: 29163000000319195 for 192.168.0.243|110437 (Syncing State)
+[Row 72] Found existing SDP ID: 29163000000319207 for 192.168.0.243|110435 (Syncing State)
+[Row 73] Found existing SDP ID: 29163000000316147 for 192.168.0.243|110433 (Syncing State)
+[Row 74] Found existing SDP ID: 29163000000320079 for 192.168.0.243|110430 (Syncing State)
+[Row 75] Found existing SDP ID: 29163000000319219 for 192.168.0.243|110426 (Syncing State)
+[Row 76] Found existing SDP ID: 29163000000321091 for 192.168.0.243|110419 (Syncing State)
+[Row 77] Found existing SDP ID: 29163000000319231 for 192.168.0.243|110417 (Syncing State)
+[Row 78] Found existing SDP ID: 29163000000319243 for 192.168.0.243|110416 (Syncing State)
+[Row 79] Found existing SDP ID: 29163000000316159 for 192.168.0.243|110413 (Syncing State)
+[Row 80] Found existing SDP ID: 29163000000323085 for 192.168.0.243|110409 (Syncing State)
+[Row 81] Found existing SDP ID: 29163000000315730 for 192.168.0.243|110407 (Syncing State)
+[Row 82] Found existing SDP ID: 29163000000320091 for 192.168.0.243|110404 (Syncing State)
+[Row 83] Found existing SDP ID: 29163000000315742 for 192.168.0.243|110403 (Syncing State)
+[Row 84] Found existing SDP ID: 29163000000316171 for 192.168.0.243|110401 (Syncing State)
+[Row 85] Found existing SDP ID: 29163000000323097 for 192.168.0.243|110396 (Syncing State)
+[Row 86] Found existing SDP ID: 29163000000316183 for 192.168.0.243|110395 (Syncing State)
+[Row 87] Found existing SDP ID: 29163000000321103 for 192.168.0.243|110393 (Syncing State)
+[Row 88] Found existing SDP ID: 29163000000321115 for 192.168.0.243|110390 (Syncing State)
+[Row 89] Found existing SDP ID: 29163000000322137 for 192.168.0.243|110387 (Syncing State)
+[Row 90] Found existing SDP ID: 29163000000320103 for 192.168.0.243|110385 (Syncing State)
+[Row 91] Found existing SDP ID: 29163000000322149 for 192.168.0.243|110384 (Syncing State)
+[Row 92] Found existing SDP ID: 29163000000320115 for 192.168.0.243|110381 (Syncing State)
+[Row 93] Found existing SDP ID: 29163000000315754 for 192.168.0.243|110379 (Syncing State)
+[Row 94] Found existing SDP ID: 29163000000323109 for 192.168.0.243|110378 (Syncing State)
+[Row 95] Found existing SDP ID: 29163000000319255 for 192.168.0.243|110376 (Syncing State)
+[Row 96] Found existing SDP ID: 29163000000321127 for 192.168.0.243|110373 (Syncing State)
+[Row 97] Found existing SDP ID: 29163000000320127 for 192.168.0.243|110370 (Syncing State)
+[Row 98] Found existing SDP ID: 29163000000319267 for 192.168.0.243|110369 (Syncing State)
+[Row 99] Found existing SDP ID: 29163000000316195 for 192.168.0.243|110368 (Syncing State)
+[Row 100] Found existing SDP ID: 29163000000319279 for 192.168.0.243|110366 (Syncing State)
+[Row 101] Found existing SDP ID: 29163000000315766 for 192.168.0.243|110364 (Syncing State)
+[Row 102] Found existing SDP ID: 29163000000315778 for 192.168.0.243|110361 (Syncing State)
+[Row 103] Found existing SDP ID: 29163000000320139 for 192.168.0.243|110359 (Syncing State)
+[Row 104] Found existing SDP ID: 29163000000321139 for 192.168.0.243|110355 (Syncing State)
+[Row 105] Found existing SDP ID: 29163000000319291 for 192.168.0.243|110352 (Syncing State)
+[Row 106] Found existing SDP ID: 29163000000322161 for 192.168.0.243|110350 (Syncing State)
+[Row 107] Found existing SDP ID: 29163000000321151 for 192.168.0.243|110348 (Syncing State)
+[Row 108] Found existing SDP ID: 29163000000315790 for 192.168.0.243|110345 (Syncing State)
+[Row 109] Found existing SDP ID: 29163000000323121 for 192.168.0.243|110344 (Syncing State)
+[Row 110] Found existing SDP ID: 29163000000323133 for 192.168.0.243|110343 (Syncing State)
+[Row 111] Found existing SDP ID: 29163000000323145 for 192.168.0.243|110341 (Syncing State)
+[Row 112] Found existing SDP ID: 29163000000320151 for 192.168.0.243|110340 (Syncing State)
+[Row 113] Found existing SDP ID: 29163000000322173 for 192.168.0.243|110339 (Syncing State)
+[Row 114] Found existing SDP ID: 29163000000315802 for 192.168.0.243|110338 (Syncing State)
+[Row 115] Found existing SDP ID: 29163000000322185 for 192.168.0.243|110337 (Syncing State)
+[Row 116] Found existing SDP ID: 29163000000316207 for 192.168.0.243|110336 (Syncing State)
+[Row 117] Found existing SDP ID: 29163000000321163 for 192.168.0.243|110325 (Syncing State)
+[Row 118] Found existing SDP ID: 29163000000319303 for 192.168.0.243|110322 (Syncing State)
+[Row 119] Found existing SDP ID: 29163000000319315 for 192.168.0.243|110320 (Syncing State)
+[Row 120] Found existing SDP ID: 29163000000321175 for 192.168.0.243|110319 (Syncing State)
+[Row 121] Found existing SDP ID: 29163000000319327 for 192.168.0.243|110317 (Syncing State)
+[Row 122] Found existing SDP ID: 29163000000321187 for 192.168.0.243|110316 (Syncing State)
+[Row 123] Found existing SDP ID: 29163000000319339 for 192.168.0.243|110312 (Syncing State)
+[Row 124] Found existing SDP ID: 29163000000321199 for 192.168.0.243|110311 (Syncing State)
+[Row 125] Found existing SDP ID: 29163000000319351 for 192.168.0.243|110310 (Syncing State)
+[Row 126] Found existing SDP ID: 29163000000315814 for 192.168.0.243|110309 (Syncing State)
+[Row 127] Found existing SDP ID: 29163000000316219 for 192.168.0.243|110308 (Syncing State)
+[Row 128] Found existing SDP ID: 29163000000315826 for 192.168.0.243|110307 (Syncing State)
+[Row 129] Found existing SDP ID: 29163000000323157 for 192.168.0.243|110306 (Syncing State)
+[Row 130] Found existing SDP ID: 29163000000320163 for 192.168.0.243|110303 (Syncing State)
+[Row 131] Found existing SDP ID: 29163000000322197 for 192.168.0.243|110300 (Syncing State)
+[Row 132] Found existing SDP ID: 29163000000315838 for 192.168.0.243|110299 (Syncing State)
+[Row 133] Found existing SDP ID: 29163000000321211 for 192.168.0.243|110298 (Syncing State)
+[Row 134] Found existing SDP ID: 29163000000323169 for 192.168.0.243|110297 (Syncing State)
+[Row 135] Found existing SDP ID: 29163000000320175 for 192.168.0.243|110296 (Syncing State)
+[Row 136] Found existing SDP ID: 29163000000323181 for 192.168.0.243|110293 (Syncing State)
+[Row 137] Found existing SDP ID: 29163000000322209 for 192.168.0.243|110292 (Syncing State)
+[Row 138] Found existing SDP ID: 29163000000320187 for 192.168.0.243|110283 (Syncing State)
+[Row 139] Found existing SDP ID: 29163000000319363 for 192.168.0.243|110282 (Syncing State)
+[Row 140] Found existing SDP ID: 29163000000320199 for 192.168.0.243|110266 (Syncing State)
+[Row 141] Found existing SDP ID: 29163000000323193 for 192.168.0.243|110265 (Syncing State)
+[Row 142] Found existing SDP ID: 29163000000319375 for 192.168.0.243|110261 (Syncing State)
+[Row 143] Found existing SDP ID: 29163000000319387 for 192.168.0.243|110260 (Syncing State)
+[Row 144] Found existing SDP ID: 29163000000323205 for 192.168.0.243|100413 (Syncing State)
+[Row 145] Found existing SDP ID: 29163000000342485 for 192.168.0.243|92365 (Syncing State)
+[Row 146] Found existing SDP ID: 29163000000315850 for 192.168.0.243|92361 (Syncing State)
+[Row 147] Found existing SDP ID: 29163000000323217 for 192.168.0.243|92360 (Syncing State)
+[Row 148] Found existing SDP ID: 29163000000315862 for 192.168.0.243|92359 (Syncing State)
+[Row 149] Found existing SDP ID: 29163000000319399 for 192.168.0.243|92358 (Syncing State)
+[Row 150] Found existing SDP ID: 29163000000320211 for 192.168.0.243|92357 (Syncing State)
+[Row 151] Found existing SDP ID: 29163000000319411 for 192.168.0.243|92351 (Syncing State)
+[Row 152] Found existing SDP ID: 29163000000315874 for 192.168.0.243|92347 (Syncing State)
+[Row 153] Found existing SDP ID: 29163000000315886 for 192.168.0.243|92339 (Syncing State)
+[Row 154] Found existing SDP ID: 29163000000315898 for 192.168.0.243|92317 (Syncing State)
+[Row 155] Found existing SDP ID: 29163000000320223 for 192.168.0.243|92307 (Syncing State)
+[Row 156] Found existing SDP ID: 29163000000319423 for 192.168.0.243|92265 (Syncing State)
+[Row 157] Found existing SDP ID: 29163000000322221 for 192.168.0.243|92260 (Syncing State)
+[Row 158] Found existing SDP ID: 29163000000315910 for 192.168.0.243|92235 (Syncing State)
+[Row 159] Found existing SDP ID: 29163000000320235 for 192.168.0.243|92229 (Syncing State)
+[Row 160] Found existing SDP ID: 29163000000320247 for 192.168.0.243|92226 (Syncing State)
+[Row 161] Found existing SDP ID: 29163000000321223 for 192.168.0.243|92213 (Syncing State)
+[Row 162] Found existing SDP ID: 29163000000321235 for 192.168.0.243|92208 (Syncing State)
+[Row 163] Found existing SDP ID: 29163000000316231 for 192.168.0.243|92199 (Syncing State)
+[Row 164] Found existing SDP ID: 29163000000321247 for 192.168.0.243|92198 (Syncing State)
+[Row 165] Found existing SDP ID: 29163000000316243 for 192.168.0.243|92193 (Syncing State)
+[Row 166] Found existing SDP ID: 29163000000316255 for 192.168.0.243|92183 (Syncing State)
+[Row 167] Found existing SDP ID: 29163000000319435 for 192.168.0.243|92169 (Syncing State)
+[Row 168] Found existing SDP ID: 29163000000322233 for 192.168.0.243|92158 (Syncing State)
+[Row 169] Found existing SDP ID: 29163000000315922 for 192.168.0.243|92142 (Syncing State)
+[Row 170] Found existing SDP ID: 29163000000322245 for 192.168.0.243|92139 (Syncing State)
+[Row 171] Found existing SDP ID: 29163000000322257 for 192.168.0.243|92121 (Syncing State)
+[Row 172] Found existing SDP ID: 29163000000315934 for 192.168.0.243|91537 (Syncing State)
+[Row 173] Found existing SDP ID: 29163000000321259 for 192.168.0.243|91462 (Syncing State)
+[Row 174] Found existing SDP ID: 29163000000320259 for 192.168.0.243|91426 (Syncing State)
+[Row 175] Found existing SDP ID: 29163000000322269 for 192.168.0.243|380249 (Syncing State)
+[Row 176] Found existing SDP ID: 29163000000321271 for 192.168.0.243|378985 (Syncing State)
+[Row 177] Found existing SDP ID: 29163000000323229 for 192.168.0.243|110516 (Syncing State)
+[Row 178] Found existing SDP ID: 29163000000319447 for 192.168.0.243|110487 (Syncing State)
+[Row 179] Found existing SDP ID: 29163000000320271 for 192.168.0.243|110474 (Syncing State)
+[Row 180] Found existing SDP ID: 29163000000321283 for 192.168.0.243|110471 (Syncing State)
+[Row 181] Found existing SDP ID: 29163000000323241 for 192.168.0.243|110454 (Syncing State)
+[Row 182] Found existing SDP ID: 29163000000321295 for 192.168.0.243|110453 (Syncing State)
+[Row 183] Found existing SDP ID: 29163000000315946 for 192.168.0.243|110414 (Syncing State)
+[Row 184] Found existing SDP ID: 29163000000323253 for 192.168.0.243|110412 (Syncing State)
+[Row 185] Found existing SDP ID: 29163000000316267 for 192.168.0.243|92345 (Syncing State)
+[Row 186] Found existing SDP ID: 29163000000316279 for 192.168.0.243|92176 (Syncing State)
+[Row 187] Found existing SDP ID: 29163000000320283 for 192.168.0.243|92150 (Syncing State)
+[Row 188] Found existing SDP ID: 29163000000320295 for 192.168.0.243|92130 (Syncing State)
+[Row 189] Found existing SDP ID: 29163000000319459 for 192.168.0.243|92116 (Syncing State)
+[Row 190] Found existing SDP ID: 29163000000322281 for 192.168.0.243|91704 (Syncing State)
+[Row 191] Found existing SDP ID: 29163000000316291 for 192.168.0.243|90043 (Syncing State)
+[Row 192] Found existing SDP ID: 29163000000322293 for 192.168.0.243|105171 (Syncing State)
+[Row 193] Found existing SDP ID: 29163000000321307 for 192.168.0.243|105170 (Syncing State)
+[Row 194] Found existing SDP ID: 29163000000322305 for 192.168.0.243|91565 (Syncing State)
+[Row 195] Found existing SDP ID: 29163000000320307 for 192.168.0.243|91564 (Syncing State)
+[Row 196] Found existing SDP ID: 29163000000320319 for 192.168.0.243|90007 (Syncing State)
+[Row 197] Found existing SDP ID: 29163000000321319 for 192.168.0.243|105228 (Syncing State)
+
+=== FINAL SUMMARY ===
+Created : 0
+Skipped : 197
+Failed  : 0
+State saved to: C:\Users\rscle\Downloads\QUalys_ME\Qualys\State\sdp_qualys_state.json
+=== Starting Qualys -> ME Workflow ===
+New token generated
+Workflow completed successfully

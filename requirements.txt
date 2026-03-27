@@ -1,0 +1,6 @@
+requests
+pandas
+numpy
+python-dateutil
+urllib3
+python-dotenv

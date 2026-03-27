@@ -1,0 +1,13 @@
+2026-03-18 19:06:19,150 [INFO] ==============================================
+2026-03-18 19:06:19,150 [INFO] [START] Qualys CSV Cleanup (Python Version)
+2026-03-18 19:06:19,151 [INFO] [TIME] 2026-03-18 19:06:19.151612
+2026-03-18 19:06:19,151 [INFO] ==============================================
+2026-03-18 19:06:19,152 [INFO] [INFO] Latest Qualys CSV detected: C:\Users\rscle\Downloads\QUalys_ME\Qualys\Qualys_Download_Vuln_Report\Cloud_Agent_Vuln_Report_20260318_184300.csv
+2026-03-18 19:06:19,156 [INFO] [INFO] Removed old cleaned report
+2026-03-18 19:06:19,157 [INFO] [STEP] Finding header and cleaning data...
+2026-03-18 19:06:19,159 [INFO] [INFO] Header row detected and processing started
+2026-03-18 19:06:19,160 [INFO] [SUCCESS] CSV cleaned successfully. Saved to: C:\Users\rscle\Downloads\QUalys_ME\Qualys\Qualys_Cleaned_Report\ME_Qualys_Vuln_Report.csv
+2026-03-18 19:06:19,161 [INFO] ==============================================
+2026-03-18 19:06:19,161 [INFO] [DONE] Cleaning completed
+2026-03-18 19:06:19,161 [INFO] [END TIME] 2026-03-18 19:06:19.161540
+2026-03-18 19:06:19,161 [INFO] ==============================================

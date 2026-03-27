@@ -1,0 +1,84 @@
+Requirement already satisfied: pip in .\.venv\Lib\site-packages (26.0.1)
+Requirement already satisfied: requests>=2.31.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 1)) (2.32.5)
+Requirement already satisfied: pandas>=2.1.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 2)) (3.0.1)
+Requirement already satisfied: numpy>=1.26.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 3)) (2.4.3)
+Requirement already satisfied: python-dateutil>=2.8.2 in .\.venv\Lib\site-packages (from -r requirements.txt (line 4)) (2.9.0.post0)
+Requirement already satisfied: urllib3>=2.0.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 5)) (2.6.3)
+Requirement already satisfied: python-dotenv>=1.0.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 6)) (1.2.2)
+Requirement already satisfied: charset_normalizer<4,>=2 in .\.venv\Lib\site-packages (from requests>=2.31.0->-r requirements.txt (line 1)) (3.4.6)
+Requirement already satisfied: idna<4,>=2.5 in .\.venv\Lib\site-packages (from requests>=2.31.0->-r requirements.txt (line 1)) (3.11)
+Requirement already satisfied: certifi>=2017.4.17 in .\.venv\Lib\site-packages (from requests>=2.31.0->-r requirements.txt (line 1)) (2026.2.25)
+Requirement already satisfied: tzdata in .\.venv\Lib\site-packages (from pandas>=2.1.0->-r requirements.txt (line 2)) (2025.3)
+Requirement already satisfied: six>=1.5 in .\.venv\Lib\site-packages (from python-dateutil>=2.8.2->-r requirements.txt (line 4)) (1.17.0)
+Package            Version
+------------------ -----------
+certifi            2026.2.25
+charset-normalizer 3.4.6
+idna               3.11
+numpy              2.4.3
+pandas             3.0.1
+pip                26.0.1
+python-dateutil    2.9.0.post0
+python-dotenv      1.2.2
+requests           2.32.5
+six                1.17.0
+tzdata             2025.3
+urllib3            2.6.3
+=================================================
+      Qualys-ME Environment Setup (Python)       
+=================================================
+[1/4] Virtual environment (.venv) already exists.
+[2/4] Upgrading pip and installing requirements...
+Running: .venv\Scripts\python.exe -m pip install --upgrade pip
+Running: .venv\Scripts\python.exe -m pip install -r requirements.txt
+[3/4] Initializing environment variables...
+[INFO] Config/.env already exists. Skipping copy.
+[4/4] Verifying installation...
+Running: .venv\Scripts\pip.exe list
+=================================================
+           Setup Completed Successfully!         
+=================================================
+To activate on Windows (PowerShell): .venv\Scripts\Activate.ps1
+=================================================
+Requirement already satisfied: pip in .\.venv\Lib\site-packages (26.0.1)
+Requirement already satisfied: requests>=2.31.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 1)) (2.32.5)
+Requirement already satisfied: pandas>=2.1.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 2)) (3.0.1)
+Requirement already satisfied: numpy>=1.26.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 3)) (2.4.3)
+Requirement already satisfied: python-dateutil>=2.8.2 in .\.venv\Lib\site-packages (from -r requirements.txt (line 4)) (2.9.0.post0)
+Requirement already satisfied: urllib3>=2.0.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 5)) (2.6.3)
+Requirement already satisfied: python-dotenv>=1.0.0 in .\.venv\Lib\site-packages (from -r requirements.txt (line 6)) (1.2.2)
+Requirement already satisfied: charset_normalizer<4,>=2 in .\.venv\Lib\site-packages (from requests>=2.31.0->-r requirements.txt (line 1)) (3.4.6)
+Requirement already satisfied: idna<4,>=2.5 in .\.venv\Lib\site-packages (from requests>=2.31.0->-r requirements.txt (line 1)) (3.11)
+Requirement already satisfied: certifi>=2017.4.17 in .\.venv\Lib\site-packages (from requests>=2.31.0->-r requirements.txt (line 1)) (2026.2.25)
+Requirement already satisfied: tzdata in .\.venv\Lib\site-packages (from pandas>=2.1.0->-r requirements.txt (line 2)) (2025.3)
+Requirement already satisfied: six>=1.5 in .\.venv\Lib\site-packages (from python-dateutil>=2.8.2->-r requirements.txt (line 4)) (1.17.0)
+Package            Version
+------------------ -----------
+certifi            2026.2.25
+charset-normalizer 3.4.6
+idna               3.11
+numpy              2.4.3
+pandas             3.0.1
+pip                26.0.1
+python-dateutil    2.9.0.post0
+python-dotenv      1.2.2
+requests           2.32.5
+six                1.17.0
+tzdata             2025.3
+urllib3            2.6.3
+=================================================
+      Qualys-ME Environment Setup (Python)       
+=================================================
+[1/4] Virtual environment (.venv) already exists.
+[2/4] Upgrading pip and installing requirements...
+Running: .venv\Scripts\python.exe -m pip install --upgrade pip
+Running: .venv\Scripts\python.exe -m pip install -r requirements.txt
+[3/4] Initializing environment variables...
+[INFO] Config/.env already exists. Skipping copy.
+[4/4] Verifying installation...
+Running: .venv\Scripts\pip.exe list
+=================================================
+           Setup Completed Successfully!         
+=================================================
+To activate on Windows (PowerShell): .venv\Scripts\Activate.ps1
+=================================================

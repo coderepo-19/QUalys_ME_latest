@@ -1,0 +1,506 @@
+{
+  "_comment": [
+    "==========================================================================",
+    "QUALYS → MANAGE ENGINE  |  routing_rules.json",
+    "==========================================================================",
+    "SETUP INSTRUCTIONS (do this once per customer):",
+    "",
+    "  STEP 1 — Fill in 'picklist_reference' below.",
+    "           Log into ManageEngine ServiceDesk Plus and copy the EXACT picklist",
+    "           values for each field into the lists. These are your reference.",
+    "",
+    "  STEP 2 — Fill in 'defaults' using values from your picklist_reference.",
+    "           These apply to ALL tickets when no rule matches.",
+    "",
+    "  STEP 3 — Fill in 'severity_map' using values from your picklist_reference.",
+    "           This maps Qualys severity (Critical/High/Medium/Low/Very Low)",
+    "           to ME fields like Priority, Urgency, Impact.",
+    "",
+    "  STEP 4 — Fill in 'rules' to route specific vulnerability types.",
+    "           Each rule matches keywords from the Qualys data and overrides",
+    "           specific ticket fields (e.g. Category, Group) for that vuln type.",
+    "",
+    "  IMPORTANT: Leave any field as empty string \"\" to skip it.",
+    "             The script will NOT send empty fields to ME.",
+    "             Even if a wrong value is sent, the script catches the error,",
+    "             drops that field, and still creates the ticket. No ticket is lost.",
+    "=========================================================================="
+  ],
+  "picklist_reference": {
+    "_comment": [
+      "LIST ALL VALID VALUES FROM YOUR MANAGEENGINE INSTANCE HERE.",
+      "These are for YOUR reference while filling in the sections below.",
+      "The script does not read this section — it is documentation only.",
+      "",
+      "Where to find each list in ManageEngine:",
+      "  categories/subcategories/items → Admin → Helpdesk → Categories",
+      "  groups                         → Admin → Helpdesk → Technician Groups",
+      "  sites                          → Admin → Helpdesk → Sites",
+      "  request_types                  → Admin → Helpdesk → Request Types",
+      "  statuses                       → Admin → Helpdesk → Status",
+      "  modes                          → Admin → Helpdesk → Mode",
+      "  priorities                     → Admin → Helpdesk → Priority",
+      "  urgencies                      → Admin → Helpdesk → Urgency",
+      "  levels                         → Admin → Helpdesk → Level",
+      "  impacts                        → Admin → Helpdesk → Impact",
+      "  templates                      → Admin → Helpdesk → Templates"
+    ],
+    "categories": [
+      "Software",
+      "Hardware",
+      "Network",
+      "Operating System",
+      "Security"
+    ],
+    "subcategories": [
+      "Windows",
+      "Linux",
+      "Patch Management",
+      "Antivirus",
+      "Firewall"
+    ],
+    "items": [
+      "Generic",
+      "OS Update",
+      "Firmware",
+      "Driver",
+      "Patch"
+    ],
+    "groups": [
+      "IT Support",
+      "Security Team",
+      "Network Team",
+      "Server Team"
+    ],
+    "sites": [
+      "Base Site",
+      "Sales-branch",
+      "Vivriti Capital",
+      "Vivriti Capital Pvt Ltd"
+    ],
+    "request_types": [
+      "Incident",
+      "Service Request"
+    ],
+    "statuses": [
+      "Open",
+      "On Hold",
+      "Canceled",
+      "Resolved",
+      "Closed",
+      "Approval Pending",
+      "Awaiting User Response"
+    ],
+    "modes": [
+      "Web Form",
+      "E-Mail",
+      "Phone Call",
+      "MS Teams",
+      "Mobile Application"
+    ],
+    "templates": [
+      "Default Request",
+      "Incident Template"
+    ],
+    "priorities": [
+      "Low",
+      "Medium",
+      "High",
+      "Urgent"
+    ],
+    "urgencies": [
+      "Low",
+      "Medium",
+      "High",
+      "Urgent"
+    ],
+    "levels": [
+      "Tier 1",
+      "Tier 2",
+      "Tier 3",
+      "Tier 4"
+    ],
+    "impacts": [
+      "Affects Business",
+      "Affects Department",
+      "Affects Group",
+      "Affects User"
+    ]
+  },
+  "defaults": {
+    "_comment": [
+      "Fallback values used when NO rule below matches the vulnerability.",
+      "Pick values from your 'picklist_reference' above.",
+      "Leave a field as empty string \"\" to skip sending it (ME uses its own default)."
+    ],
+    "requester_name": "Qualys",
+    "category": "",
+    "subcategory": "",
+    "item": "",
+    "group": "",
+    "site": "",
+    "technician": "",
+    "template": "Default Request",
+    "request_type": "Incident",
+    "status": "Open",
+    "mode": "E-Mail",
+    "level": "",
+    "impact": "Affects User"
+  },
+  "severity_map": {
+    "_comment": [
+      "Maps Qualys severity → SDP ticket fields.",
+      "Qualys severity buckets: Critical, High, Medium, Low, Very Low.",
+      "Pick values from your 'picklist_reference' lists above.",
+      "Leave 'impact' or 'level' as empty string \"\" to skip those fields.",
+      "The 'emails' list is the CC/notify list. Use [] for no emails."
+    ],
+    "Critical": {
+      "priority": "High",
+      "urgency": "Urgent",
+      "level": "",
+      "emails": []
+    },
+    "High": {
+      "priority": "High",
+      "urgency": "High",
+      "level": "",
+      "emails": []
+    },
+    "Medium": {
+      "priority": "Medium",
+      "urgency": "Normal",
+      "level": "",
+      "emails": []
+    },
+    "Low": {
+      "priority": "Low",
+      "urgency": "Low",
+      "level": "",
+      "emails": []
+    },
+    "Very Low": {
+      "priority": "Low",
+      "urgency": "Low",
+      "level": "",
+      "emails": []
+    }
+  },
+  "rules": [
+    {
+      "_comment": [
+        "ROUTING RULES — ordered, FIRST MATCH WINS.",
+        "",
+        "Each rule has:",
+        "  match_fields : Qualys CSV columns to search in. Options: category, title, os, ip, qid",
+        "  keywords     : if ANY keyword appears in any match_field, this rule fires (case-insensitive)",
+        "",
+        "Then set the SDP fields to use for matching tickets.",
+        "Pick values from your picklist_reference above.",
+        "Leave any field as empty string \"\" to fall back to the 'defaults' value.",
+        "Omit a field entirely to also fall back to the 'defaults' value."
+      ]
+    },
+    {
+      "_comment": "Windows OS vulnerabilities",
+      "match_fields": [
+        "category",
+        "title",
+        "os"
+      ],
+      "keywords": [
+        "windows",
+        "microsoft",
+        "ms-",
+        "msft"
+      ],
+      "category": "General",
+      "subcategory": "",
+      "item": "",
+      "group": "IT Security Team",
+      "site": "Base Site",
+      "request_type": "Incident",
+      "mode": "E-Mail",
+      "impact": "Affects Business"
+    },
+    {
+      "_comment": "Linux / Unix OS vulnerabilities",
+      "match_fields": [
+        "category",
+        "title",
+        "os"
+      ],
+      "keywords": [
+        "unix",
+        "linux",
+        "ubuntu",
+        "rhel",
+        "centos",
+        "debian",
+        "fedora",
+        "suse"
+      ],
+      "category": "Operating System",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "Base Site",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Software / Application / Patch vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "software",
+        "application",
+        "patch",
+        "update",
+        "installer",
+        "package",
+        "library"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Hardware / Firmware / BIOS / Driver vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "hardware",
+        "firmware",
+        "bios",
+        "driver",
+        "physical",
+        "device",
+        "controller"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Network / Firewall / SSL / TLS vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "network",
+        "firewall",
+        "router",
+        "switch",
+        "ssl",
+        "tls",
+        "vpn",
+        "wifi",
+        "dhcp",
+        "dns"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Web / HTTP service vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "web",
+        "http",
+        "https",
+        "cgi",
+        "apache",
+        "nginx",
+        "iis",
+        "tomcat"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Remote access / Service vulnerabilities (SMB, RDP, SSH, FTP)",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "service",
+        "smb",
+        "rdp",
+        "ssh",
+        "ftp",
+        "telnet",
+        "remote"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Database vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "database",
+        "sql",
+        "mysql",
+        "oracle",
+        "mssql",
+        "postgres",
+        "mongodb"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Printer vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "printer",
+        "print",
+        "cups",
+        "spooler"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Internet Explorer vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "internet explorer",
+        "ie ",
+        "msie"
+      ],
+      "category": "Software",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "Base Site",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Office Application vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "office",
+        "excel",
+        "word",
+        "powerpoint",
+        "outlook",
+        "access",
+        "visio",
+        "project"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Security Policy vulnerabilities",
+      "match_fields": [
+        "category",
+        "title"
+      ],
+      "keywords": [
+        "security policy",
+        "compliance",
+        "policy",
+        "audit",
+        "configuration"
+      ],
+      "category": "",
+      "subcategory": "",
+      "item": "",
+      "group": "",
+      "site": "",
+      "request_type": "Incident",
+      "mode": "",
+      "impact": ""
+    },
+    {
+      "_comment": "Local vulnerabilities (miscellaneous local vectors)",
+      "match_fields": [
+        "category"
+      ],
+      "keywords": [
+        "local"
+      ],
+      "category": "General",
+      "subcategory": "",
+      "item": "",
+      "group": "IT Security Team",
+      "site": "Base Site",
+      "request_type": "Incident",
+      "mode": "E-Mail",
+      "impact": "Affects Business"
+    }
+  ]
+}

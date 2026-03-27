@@ -1,0 +1,5 @@
+date,script,attempts,status,start_time,end_time
+2026-01-04,01_Download_Qualys_Vuln_Data_1.sh,1,SUCCESS,2026-01-04 13:02:15,2026-01-04 13:03:20
+2026-01-04,02_qualys_clean_csv_2.sh,1,SUCCESS,2026-01-04 13:03:20,2026-01-04 13:03:20
+2026-01-04,03_Qualys_Sanitized_Data_3.py,1,SUCCESS,2026-01-04 13:03:20,2026-01-04 13:03:20
+2026-01-04,04_Qualys_Master_DB_4.py,1,FATAL,2026-01-04 13:03:20,2026-01-04 13:03:34
