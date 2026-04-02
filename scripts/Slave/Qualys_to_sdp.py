@@ -754,8 +754,8 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
                     if "group" in req_obj:      field_names.add("group")
                     if "site" in req_obj:       field_names.add("site")
 
+            fields_to_drop = set()
             if field_names:
-                fields_to_drop = set()
                 for fld in field_names:
                     if fld in CASCADE_DROP:
                         fields_to_drop.update(CASCADE_DROP[fld])
@@ -767,7 +767,10 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
                 fields_to_drop = {f for f in fields_to_drop if f in req_obj}
                 
                 if fields_to_drop:
-                    print(f"[RETRY {depth+1}] Dropping failing fields (including cascades) from SDP request: {sorted(fields_to_drop)}", file=sys.stderr)
+                    # Show exactly WHY SDP is rejecting these fields
+                    reasons = " / ".join([m.get("message", "Validation failed") for m in error_msgs if m.get("message")])
+                    print(f"[RETRY {depth+1}] DROPPING {sorted(fields_to_drop)} | SDP REASON: {reasons}", file=sys.stderr)
+                    
                     for fld in fields_to_drop:
                         req_obj.pop(fld, None)
                     payload["request"] = req_obj
