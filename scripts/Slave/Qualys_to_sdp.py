@@ -1,3 +1,4 @@
+
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -740,12 +741,21 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
             req_obj = payload.get("request", {})
 
             # Collect fields to drop (including cascades)
+            # SDP Cloud returns "fields": ["category"] (list); on-prem may return "field": "category" (string)
             field_names = set()
             for msg in error_msgs:
+                # Handle singular "field"
                 fld = msg.get("field")
                 if fld:
                     field_names.add(str(fld))
-                
+                # Handle plural "fields" (list) — SDP Cloud format
+                flds = msg.get("fields")
+                if isinstance(flds, list):
+                    for f in flds:
+                        field_names.add(str(f))
+                elif isinstance(flds, str) and flds:
+                    field_names.add(flds)
+
                 # Handle the generic "Site/Group/Technician validation failed" message
                 msg_text = str(msg.get("message", "")).lower()
                 if "site/group/technician validation failed" in msg_text:
