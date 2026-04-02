@@ -730,6 +730,8 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
     
     # If 400 error, check if it's a field mismatch
     if r.status_code == 400 and depth < 5:
+        # DEBUG: Show what we actually sent if it failed
+        print(f"[ERROR] SDP rejected payload on attempt {depth+1}: {json.dumps(payload['request'], indent=2)}", file=sys.stderr)
         try:
             res = r.json()
             error_msgs = res.get("response_status", {}).get("messages", [])
