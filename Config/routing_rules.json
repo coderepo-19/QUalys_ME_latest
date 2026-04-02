@@ -134,13 +134,13 @@
       "Leave a field as empty string \"\" to skip sending it (ME uses its own default)."
     ],
     "requester_name": "Qualys",
-    "category": "",
-    "subcategory": "",
+    "category": "Vulnerability Fixing",
+    "subcategory": "On-Prem Server Vulnerabilities",
     "item": "",
-    "group": "",
-    "site": "",
-    "technician": "",
-    "template": "Default All Related Request",
+    "group": "IT Support Team",
+    "site": "Base Site",
+    "technician": "Prasanth Devaraj | Vivriti Capital",
+    "template": "",
     "request_type": "Incident",
     "status": "Open",
     "mode": "E-Mail",
@@ -214,14 +214,14 @@
         "ms-",
         "msft"
       ],
-      "category": "General",
-      "subcategory": "",
+      "category": "Vulnerability Fixing",
+      "subcategory": "On-Prem Server Vulnerabilities",
       "item": "",
       "group": "IT Security Team",
       "site": "Base Site",
       "request_type": "Incident",
       "mode": "E-Mail",
-      "impact": "Affects Business"
+      "impact": "Affects User"
     },
     {
       "_comment": "Linux / Unix OS vulnerabilities",
@@ -493,14 +493,14 @@
       "keywords": [
         "local"
       ],
-      "category": "General",
-      "subcategory": "",
+      "category": "Vulnerability Fixing",
+      "subcategory": "On-Prem Server Vulnerabilities",
       "item": "",
       "group": "IT Security Team",
       "site": "Base Site",
       "request_type": "Incident",
       "mode": "E-Mail",
-      "impact": "Affects Business"
+      "impact": "Affects User"
     }
   ]
 }
