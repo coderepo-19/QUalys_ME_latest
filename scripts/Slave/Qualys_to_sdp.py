@@ -190,6 +190,19 @@ def get_assigned_technician(rr_path: str) -> Optional[str]:
         
     return None
 
+def get_val(d: dict, key: str, default: Optional[str] = "") -> Optional[str]:
+    """Case-insensitive/Flexible key lookup for routing JSON."""
+    # Try exact lowercase
+    if key in d: return d[key]
+    # Try Capitalized (e.g. "Category")
+    cap = key.capitalize()
+    if cap in d: return d[cap]
+    # Special case for subcategory
+    if key == "subcategory":
+        if "Sub Category" in d: return d["Sub Category"]
+        if "SubCategory" in d: return d["SubCategory"]
+    return default
+
 def resolve_routing(row: Dict[str, str], sev_bucket: str) -> dict:
     """
     Match the vulnerability row against ROUTING_RULES.
@@ -206,18 +219,18 @@ def resolve_routing(row: Dict[str, str], sev_bucket: str) -> dict:
     sev_info = sev_map.get(sev_bucket, {})
 
     resolved = {
-        "requester_name": defaults.get("requester_name", ""),
-        "category":     defaults.get("category", ""),
-        "subcategory":  defaults.get("subcategory", ""),
-        "item":         defaults.get("item", ""),
-        "group":        defaults.get("group", ""),
-        "site":         defaults.get("site", ""),
-        "technician":   defaults.get("technician", ""),
-        "request_type": defaults.get("request_type", "Incident"),
-        "status":       defaults.get("status", "Open"),
-        "mode":         defaults.get("mode", "E-Mail"),
-        "template":     defaults.get("template", "Default Request"),
-        "impact":       defaults.get("impact", ""),
+        "requester_name": get_val(defaults, "requester_name", ""),
+        "category":     get_val(defaults, "category", ""),
+        "subcategory":  get_val(defaults, "subcategory", ""),
+        "item":         get_val(defaults, "item", ""),
+        "group":        get_val(defaults, "group", ""),
+        "site":         get_val(defaults, "site", ""),
+        "technician":   get_val(defaults, "technician", ""),
+        "request_type": get_val(defaults, "request_type", "Incident"),
+        "status":       get_val(defaults, "status", "Open"),
+        "mode":         get_val(defaults, "mode", "E-Mail"),
+        "template":     get_val(defaults, "template", "Default Request"),
+        "impact":       get_val(defaults, "impact", ""),
         "priority":     sev_info.get("priority", "Medium"),
         "urgency":      sev_info.get("urgency", "Medium"),
         "level":        sev_info.get("level", ""),
@@ -234,9 +247,11 @@ def resolve_routing(row: Dict[str, str], sev_bucket: str) -> dict:
         # If any keyword matches any of the signal fields
         if any(kw.lower() in sig for kw in rule["keywords"] for sig in signals):
             # Override resolved with rule-specific values if they exist
-            for key in ["category", "subcategory", "item", "group", "site", "technician", "request_type", "mode", "impact"]:
-                if key in rule:
-                    resolved[key] = rule[key]
+            # Note: We still use lowercase keys for 'resolved' internal dict
+            for key in ["requester_name", "category", "subcategory", "item", "group", "site", "technician", "request_type", "mode", "impact", "status", "template"]:
+                val = get_val(rule, key, None)
+                if val is not None:
+                    resolved[key] = val
             
             # Allow rule-specific severity overrides
             sev_overrides = rule.get("severity_override", {}).get(sev_bucket, {})
@@ -698,6 +713,9 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
         "category":    ["category", "subcategory", "item"],
         "item":        ["item"],
         "impact":      ["impact"],
+        "technician":  ["technician"],
+        "group":       ["technician", "group"],
+        "site":        ["technician", "group", "site"],
     }
 
     headers = {
@@ -717,27 +735,41 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
             error_msgs = res.get("response_status", {}).get("messages", [])
             
             # The actual fields are inside payload["request"]
+            # The actual fields are inside payload["request"]
             req_obj = payload.get("request", {})
-            
+
             # Collect fields to drop (including cascades)
-            fields_to_drop = set()
+            field_names = set()
             for msg in error_msgs:
                 fld = msg.get("field")
-                if not fld:
-                    continue
-                # Drop the failing field and any fields that cascade from it
-                cascade = CASCADE_DROP.get(fld, [fld])
-                for cf in cascade:
-                    if cf in req_obj:
-                        fields_to_drop.add(cf)
-            
-            if fields_to_drop:
-                print(f"[RETRY {depth+1}] Dropping failing fields from SDP request: {sorted(fields_to_drop)}", file=sys.stderr)
-                for fld in fields_to_drop:
-                    req_obj.pop(fld, None)
+                if fld:
+                    field_names.add(str(fld))
                 
-                # Recursive retry with the updated payload
-                return post_sdp(base_url, token, payload, timeout, depth + 1)
+                # Handle the generic "Site/Group/Technician validation failed" message
+                msg_text = str(msg.get("message", "")).lower()
+                if "site/group/technician validation failed" in msg_text:
+                    if "technician" in req_obj: field_names.add("technician")
+                    if "group" in req_obj:      field_names.add("group")
+                    if "site" in req_obj:       field_names.add("site")
+
+            if field_names:
+                fields_to_drop = set()
+                for fld in field_names:
+                    if fld in CASCADE_DROP:
+                        fields_to_drop.update(CASCADE_DROP[fld])
+                    else:
+                        fields_to_drop.add(fld)
+
+            if fields_to_drop:
+                # Filter to only the fields that are actually in the request
+                fields_to_drop = {f for f in fields_to_drop if f in req_obj}
+                
+                if fields_to_drop:
+                    print(f"[RETRY {depth+1}] Dropping failing fields (including cascades) from SDP request: {sorted(fields_to_drop)}", file=sys.stderr)
+                    for fld in fields_to_drop:
+                        req_obj.pop(fld, None)
+                    payload["request"] = req_obj
+                    return post_sdp(base_url, token, payload, timeout, depth + 1)
                 
         except Exception as e:
             print(f"[RETRY] Failed to parse error response: {e}", file=sys.stderr)
