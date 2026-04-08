@@ -728,35 +728,24 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
     input_data = {"input_data": json.dumps(payload, ensure_ascii=False)}
     r = requests.post(base_url, headers=headers, data=input_data, timeout=timeout)
     
-    # If 400 error, check if it's a field mismatch
+    # If 400 error, silently self-heal by dropping failing fields and retrying
     if r.status_code == 400 and depth < 5:
-        # DEBUG: Show what we actually sent if it failed
-        print(f"[ERROR] SDP rejected payload on attempt {depth+1}: {json.dumps(payload['request'], indent=2)}", file=sys.stderr)
         try:
             res = r.json()
             error_msgs = res.get("response_status", {}).get("messages", [])
-            
-            # The actual fields are inside payload["request"]
-            # The actual fields are inside payload["request"]
             req_obj = payload.get("request", {})
 
-            # Collect fields to drop (including cascades)
-            # SDP Cloud returns "fields": ["category"] (list); on-prem may return "field": "category" (string)
             field_names = set()
             for msg in error_msgs:
-                # Handle singular "field"
                 fld = msg.get("field")
                 if fld:
                     field_names.add(str(fld))
-                # Handle plural "fields" (list) — SDP Cloud format
                 flds = msg.get("fields")
                 if isinstance(flds, list):
                     for f in flds:
                         field_names.add(str(f))
                 elif isinstance(flds, str) and flds:
                     field_names.add(flds)
-
-                # Handle the generic "Site/Group/Technician validation failed" message
                 msg_text = str(msg.get("message", "")).lower()
                 if "site/group/technician validation failed" in msg_text:
                     if "technician" in req_obj: field_names.add("technician")
@@ -764,30 +753,22 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
                     if "site" in req_obj:       field_names.add("site")
 
             fields_to_drop = set()
-            if field_names:
-                for fld in field_names:
-                    if fld in CASCADE_DROP:
-                        fields_to_drop.update(CASCADE_DROP[fld])
-                    else:
-                        fields_to_drop.add(fld)
+            for fld in field_names:
+                if fld in CASCADE_DROP:
+                    fields_to_drop.update(CASCADE_DROP[fld])
+                else:
+                    fields_to_drop.add(fld)
 
+            fields_to_drop = {f for f in fields_to_drop if f in req_obj}
             if fields_to_drop:
-                # Filter to only the fields that are actually in the request
-                fields_to_drop = {f for f in fields_to_drop if f in req_obj}
-                
-                if fields_to_drop:
-                    # Show exactly WHY SDP is rejecting these fields
-                    reasons = " / ".join([m.get("message", "Validation failed") for m in error_msgs if m.get("message")])
-                    print(f"[RETRY {depth+1}] DROPPING {sorted(fields_to_drop)} | SDP REASON: {reasons}", file=sys.stderr)
-                    
-                    for fld in fields_to_drop:
-                        req_obj.pop(fld, None)
-                    payload["request"] = req_obj
-                    return post_sdp(base_url, token, payload, timeout, depth + 1)
-                
-        except Exception as e:
-            print(f"[RETRY] Failed to parse error response: {e}", file=sys.stderr)
-            
+                for fld in fields_to_drop:
+                    req_obj.pop(fld, None)
+                payload["request"] = req_obj
+                return post_sdp(base_url, token, payload, timeout, depth + 1)
+
+        except Exception:
+            pass
+
     return r
     
 # ------------------------------
