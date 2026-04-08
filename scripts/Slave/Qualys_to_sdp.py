@@ -708,8 +708,9 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
      - If 'category' fails, also drop 'subcategory' and 'item'
     """
     # Fields that are linked and must be dropped together
+    # NOTE: subcategory/item should NOT cascade to drop category — category is often mandatory!
     CASCADE_DROP = {
-        "subcategory": ["subcategory", "category", "item"],
+        "subcategory": ["subcategory", "item"],
         "category":    ["category", "subcategory", "item"],
         "item":        ["item"],
         "impact":      ["impact"],
