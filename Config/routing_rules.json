@@ -130,8 +130,9 @@
   "defaults": {
     "_comment": [
       "Fallback values used when NO rule below matches the vulnerability.",
-      "Pick values from your 'picklist_reference' above.",
-      "Leave a field as empty string \"\" to skip sending it (ME uses its own default)."
+      "IMPORTANT: 'category' must exactly match a value from SDP Admin -> Helpdesk -> Categories.",
+      "If you see 4012 category errors, either: (A) make Category not required in your SDP template,",
+      "OR (B) put the exact category name from SDP below. Leave as empty string to skip sending it."
     ],
     "requester_name": "Qualys",
     "category": "Security",
@@ -139,7 +140,7 @@
     "item": "",
     "group": "IT Support Team",
     "site": "Base Site",
-    "technician": "",
+    "technician": "Prasanth Devaraj | Vivriti Capital",
     "template": "",
     "request_type": "Incident",
     "status": "Open",
@@ -493,7 +494,7 @@
       "keywords": [
         "local"
       ],
-      "category": "Security",
+      "category": "",
       "subcategory": "",
       "item": "",
       "group": "IT Support Team",
