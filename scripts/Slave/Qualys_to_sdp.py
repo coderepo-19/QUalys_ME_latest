@@ -729,10 +729,16 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
     r = requests.post(base_url, headers=headers, data=input_data, timeout=timeout)
     
     # If 400 error, silently self-heal by dropping failing fields and retrying
-    if r.status_code == 400 and depth < 5:
+    # SDP sometimes returns HTTP 200 with status_code 4000 in JSON — catch both
+    try:
+        res_json = r.json()
+    except Exception:
+        res_json = {}
+    json_status = res_json.get("response_status", {}).get("status_code", 0)
+
+    if (r.status_code == 400 or json_status == 4000) and depth < 5:
         try:
-            res = r.json()
-            error_msgs = res.get("response_status", {}).get("messages", [])
+            error_msgs = res_json.get("response_status", {}).get("messages", [])
             req_obj = payload.get("request", {})
 
             field_names = set()
@@ -768,6 +774,7 @@ def post_sdp(base_url: str, token: str, payload: Dict[str, Any], timeout: int = 
 
         except Exception:
             pass
+
 
     return r
     
