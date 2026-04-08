@@ -135,7 +135,7 @@
       "OR (B) put the exact category name from SDP below. Leave as empty string to skip sending it."
     ],
     "requester_name": "Qualys",
-    "category": "Security",
+    "category": "",
     "subcategory": "",
     "item": "",
     "group": "IT Support Team",
@@ -215,7 +215,7 @@
         "ms-",
         "msft"
       ],
-      "category": "Security",
+      "category": "",
       "subcategory": "",
       "item": "",
       "group": "IT Support Team",
