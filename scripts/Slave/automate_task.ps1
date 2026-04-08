@@ -1,45 +1,49 @@
+# =============================================================
 # Qualys-SDP Automation Setup Script
-# This script creates a Windows Scheduled Task based on settings in Config\.env
+# Creates a Windows Scheduled Task from Config\.env settings
+#
+# Supported Frequencies:
+#   Daily   - runs every day at AUTO_RUN_TIME
+#   Weekly  - runs on AUTO_RUN_DAYS at AUTO_RUN_TIME
+#   Monthly - runs on the Nth occurrence of AUTO_RUN_DAYS
+#             in the month (controlled by AUTO_RUN_WEEK_OF_MONTH)
+#             e.g. AUTO_RUN_DAYS=Friday, AUTO_RUN_WEEK_OF_MONTH=1 → 1st Friday
+# =============================================================
 
 # 1. Determine Project Root (two levels up from scripts/Slave)
-$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+$scriptDir   = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $projectRoot = Split-Path -Parent (Split-Path -Parent $scriptDir)
-$envPath = Join-Path $projectRoot "Config\.env"
+$envPath     = Join-Path $projectRoot "Config\.env"
 
-# 2. Function to load .env variables
+# 2. Load .env file
 function Import-Env {
     param($Path)
     if (Test-Path $Path) {
         Get-Content $Path | ForEach-Object {
-            # Match Name="Value" or Name='Value' or Name=Value
             if ($_ -match "^\s*([^#\s][^=]*)\s*=\s*['""]?(.*?)['""]?\s*$") {
-                $name = $matches[1].Trim()
-                $value = $matches[2].Trim()
-                Set-Variable -Name "ENV_$name" -Value $value -Scope Script -Force
+                Set-Variable -Name "ENV_$($matches[1].Trim())" -Value $matches[2].Trim() -Scope Script -Force
             }
         }
     }
 }
-
-# 3. Load Environment
 Import-Env -Path $envPath
 
-# 4. Define Paths & Defaults
-$venvPython = Join-Path $projectRoot ".venv\Scripts\python.exe"
+# 3. Paths & Defaults
+$venvPython  = Join-Path $projectRoot ".venv\Scripts\python.exe"
 $masterScript = Join-Path $projectRoot "scripts\Master\Master.py"
-$taskName = "Qualys-SDP-Integration"
+$taskName    = "Qualys-SDP-Integration"
+$wrapperPath = Join-Path $projectRoot "scripts\Slave\_run_check.ps1"
 
-# Read from .env or use defaults
-$freq     = if ($null -ne $Script:ENV_AUTO_RUN_FREQUENCY) { $Script:ENV_AUTO_RUN_FREQUENCY } else { "Daily" }
-$time     = if ($null -ne $Script:ENV_AUTO_RUN_TIME) { $Script:ENV_AUTO_RUN_TIME } else { "09:00" }
-$daysRaw  = if ($null -ne $Script:ENV_AUTO_RUN_DAYS) { $Script:ENV_AUTO_RUN_DAYS } else { "Monday" }
+$freq        = if ($Script:ENV_AUTO_RUN_FREQUENCY) { $Script:ENV_AUTO_RUN_FREQUENCY } else { "Daily" }
+$time        = if ($Script:ENV_AUTO_RUN_TIME)       { $Script:ENV_AUTO_RUN_TIME }      else { "09:00" }
+$daysRaw     = if ($Script:ENV_AUTO_RUN_DAYS)       { $Script:ENV_AUTO_RUN_DAYS }      else { "Monday" }
+$weekOfMonth = if ($Script:ENV_AUTO_RUN_WEEK_OF_MONTH) { $Script:ENV_AUTO_RUN_WEEK_OF_MONTH } else { "1" }
 
-# Parse days into array (handling comma-separated lists)
-$daysArray = $daysRaw.Split(",").Trim()
+$daysArray = $daysRaw.Split(",") | ForEach-Object { $_.Trim() }
 
-# 5. Verification
+# 4. Validate paths
 if (!(Test-Path $venvPython)) {
-    Write-Error "Virtual environment (.venv) not found. Please run setup_env.ps1 first."
+    Write-Error "Virtual environment not found. Run setup_env.ps1 first."
     exit 1
 }
 if (!(Test-Path $masterScript)) {
@@ -50,62 +54,121 @@ if (!(Test-Path $masterScript)) {
 Write-Host "=================================================" -ForegroundColor Cyan
 Write-Host "      Qualys-ME Automation Setup (Windows)       " -ForegroundColor Cyan
 Write-Host "=================================================" -ForegroundColor Cyan
-Write-Host "Loading settings from Config\.env..." -ForegroundColor Gray
 
-# 6. Create Task Trigger based on Frequency
+# 5. Build trigger & action based on frequency
 try {
-    if ($freq -eq "Weekly") {
-        # DaysOfWeek expects enum array (e.g., Monday,Tuesday)
-        $trigger = New-ScheduledTaskTrigger -Weekly -At $time -DaysOfWeek $daysArray
-        $schedDesc = "Weekly on [$daysRaw] at $time"
+    if ($freq -eq "Daily") {
+        $trigger   = New-ScheduledTaskTrigger -Daily -At $time
+        $schedDesc = "Every day at $time"
+        $action    = New-ScheduledTaskAction -Execute $venvPython `
+                        -Argument """$masterScript""" `
+                        -WorkingDirectory $projectRoot
+
+    } elseif ($freq -eq "Weekly") {
+        $trigger   = New-ScheduledTaskTrigger -Weekly -At $time -DaysOfWeek $daysArray
+        $schedDesc = "Every [$daysRaw] at $time"
+        $action    = New-ScheduledTaskAction -Execute $venvPython `
+                        -Argument """$masterScript""" `
+                        -WorkingDirectory $projectRoot
+
     } elseif ($freq -eq "Monthly") {
-        # DaysOfMonth requires int array (e.g., 1,15)
-        $daysIntArray = $daysArray | ForEach-Object { [int]$_ }
-        $trigger = New-ScheduledTaskTrigger -Monthly -At $time -DaysOfMonth $daysIntArray
-        $schedDesc = "Monthly on Day(s) [$daysRaw] at $time"
+        # Windows Task Scheduler doesn't natively support "Nth weekday of month".
+        # Solution: schedule Weekly on the chosen day, but wrap with a check script
+        # that exits early if today is NOT the correct Nth occurrence.
+
+        # Determine ordinal label
+        $ordinal = switch ($weekOfMonth) {
+            "1"    { "1st" }
+            "2"    { "2nd" }
+            "3"    { "3rd" }
+            "4"    { "4th" }
+            "Last" { "Last" }
+            default { "${weekOfMonth}th" }
+        }
+        $schedDesc = "$ordinal $daysRaw of every month at $time"
+
+        # Write the wrapper check script
+        $wrapperContent = @"
+# Auto-generated by automate_task.ps1 - DO NOT EDIT
+# Runs the main script only on the $ordinal $daysRaw of the month
+param()
+`$target_day  = "$($daysArray[0])"
+`$target_week = "$weekOfMonth"
+`$today       = Get-Date
+
+# Check: is today the correct day of the week?
+if (`$today.DayOfWeek.ToString() -ne `$target_day) { exit 0 }
+
+# Count which occurrence of this weekday we are in the month
+`$occurrence = 0
+for (`$d = 1; `$d -le `$today.Day; `$d++) {
+    `$check = Get-Date -Year `$today.Year -Month `$today.Month -Day `$d
+    if (`$check.DayOfWeek.ToString() -eq `$target_day) { `$occurrence++ }
+}
+
+# Handle "Last" week-of-month
+if (`$target_week -eq "Last") {
+    `$daysInMonth = [DateTime]::DaysInMonth(`$today.Year, `$today.Month)
+    `$isLast = `$true
+    for (`$d = `$today.Day + 1; `$d -le `$daysInMonth; `$d++) {
+        `$check = Get-Date -Year `$today.Year -Month `$today.Month -Day `$d
+        if (`$check.DayOfWeek.ToString() -eq `$target_day) { `$isLast = `$false; break }
+    }
+    if (-not `$isLast) { exit 0 }
+} else {
+    if (`$occurrence -ne [int]`$target_week) { exit 0 }
+}
+
+# Correct day — run the main script
+& "$venvPython" "$masterScript"
+"@
+        Set-Content -Path $wrapperPath -Value $wrapperContent -Encoding UTF8
+        Write-Host "Wrapper script written to: $wrapperPath" -ForegroundColor Gray
+
+        # Weekly trigger on the chosen day (the wrapper does the month-week check)
+        $trigger = New-ScheduledTaskTrigger -Weekly -At $time -DaysOfWeek $daysArray
+        $action  = New-ScheduledTaskAction -Execute "powershell.exe" `
+                        -Argument "-NonInteractive -ExecutionPolicy Bypass -File ""$wrapperPath""" `
+                        -WorkingDirectory $projectRoot
+
     } else {
-        $trigger = New-ScheduledTaskTrigger -Daily -At $time
-        $schedDesc = "Daily at $time"
+        Write-Error "Unknown frequency: $freq. Use Daily, Weekly, or Monthly."
+        exit 1
     }
 } catch {
-    Write-Host "-------------------------------------------------" -ForegroundColor Red
-    Write-Error "Invalid Schedule Settings in .env (Freq: $freq, Time: $time, Days: $daysRaw)"
-    Write-Host "For Weekly, use days like: Monday, Tuesday, etc."
-    Write-Host "For Monthly, use numbers like: 1, 15, 31."
-    Write-Host "-------------------------------------------------" -ForegroundColor Red
+    Write-Error "Failed to create trigger: $_"
+    Write-Host "For Weekly:  AUTO_RUN_DAYS = Monday, Friday ..."
+    Write-Host "For Monthly: AUTO_RUN_DAYS = Friday, AUTO_RUN_WEEK_OF_MONTH = 1 (or 2,3,4,Last)"
     exit 1
 }
 
-Write-Host "Target Schedule: $schedDesc" -ForegroundColor Yellow
+# 6. Settings
+$settings = New-ScheduledTaskSettingsSet `
+    -AllowStartIfOnBatteries `
+    -DontStopIfGoingOnBatteries `
+    -MultipleInstances IgnoreNew
 
-# 7. Create Task Action
-$action = New-ScheduledTaskAction -Execute $venvPython `
-    -Argument """$masterScript""" `
-    -WorkingDirectory $projectRoot
-
-# 8. Create Task Settings
-$settings = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -MultipleInstances IgnoreNew
-
-# 9. Register Task
+# 7. Register task
 try {
-    # Check if task already exists and remove it to update
     if (Get-ScheduledTask -TaskName $taskName -ErrorAction SilentlyContinue) {
         Unregister-ScheduledTask -TaskName $taskName -Confirm:$false
-        Write-Host "Updating existing task..." -ForegroundColor Gray
+        Write-Host "Removing old task to update..." -ForegroundColor Gray
     }
-    
-    Register-ScheduledTask -TaskName $taskName -Action $action -Trigger $trigger -Settings $settings -Description "Qualys to ServiceDesk Plus Integration - Automatically triggered via .env settings"
-    
+
+    Register-ScheduledTask `
+        -TaskName    $taskName `
+        -Action      $action `
+        -Trigger     $trigger `
+        -Settings    $settings `
+        -Description "Qualys to ServiceDesk Plus Integration | Schedule: $schedDesc"
+
     Write-Host "=================================================" -ForegroundColor Cyan
     Write-Host "        [SUCCESS] Automation Scheduled!          " -ForegroundColor Green
     Write-Host "=================================================" -ForegroundColor Cyan
-    Write-Host "Task Name   : $taskName"
-    Write-Host "Schedule    : $schedDesc"
-    Write-Host "Working Dir : $projectRoot"
+    Write-Host "Task Name : $taskName"
+    Write-Host "Schedule  : $schedDesc"
     Write-Host "=================================================" -ForegroundColor Cyan
-    Write-Host "You can manage this task in 'Task Scheduler' (taskschd.msc)."
+    Write-Host "Manage this task in: taskschd.msc (Task Scheduler)" -ForegroundColor Yellow
 } catch {
-    Write-Host "-------------------------------------------------" -ForegroundColor Red
-    Write-Error "CRITICAL: Access Denied. Please run PowerShell as ADMINISTRATOR to register the task."
-    Write-Host "-------------------------------------------------" -ForegroundColor Red
+    Write-Error "FAILED: Run PowerShell as ADMINISTRATOR to register tasks."
 }
